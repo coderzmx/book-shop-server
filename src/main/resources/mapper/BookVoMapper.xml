@@ -26,30 +26,47 @@
     cate_id, book_flag, book_recommend,author_name
   </sql>
 
-  <select id="selectAll" resultMap="BaseResultMap">
+  <sql id="filterCondition">
+    <if test="condition==2">
+      order by book_salevolume desc
+    </if>
+    <if test="condition==3">
+      order by book_saleprice
+    </if>
+    <if test="condition==4">
+      order by book_presstime desc
+    </if>
+  </sql>
+
+  <select id="selectAllByCondition" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from book left join author
     on book.author_id=author.author_id
+    <include refid="filterCondition"/>
   </select>
 
-  <select id="selectBySecondCateId" resultMap="BaseResultMap" parameterType="int">
+  <select id="selectBySecondCateIdAndCondition" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from book left join author
     on book.author_id=author.author_id
     where book.cate_id=#{id}
+    <include refid="filterCondition"/>
   </select>
 
-  <select id="selectByFirstCateId" resultMap="BaseResultMap">
+  <select id="selectByFirstCateIdAndCondition" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from book left join author
     on book.author_id=author.author_id
     where book.cate_id in
-    <foreach collection="list" open="(" separator="," close=")" item="id">
+    <foreach collection="ids" open="(" separator="," close=")" item="id">
       #{id}
     </foreach>
+    <include refid="filterCondition"/>
   </select>
+
+
 
 </mapper>

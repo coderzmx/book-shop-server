@@ -13,9 +13,10 @@ import java.util.List;
  **/
 public interface BookService {
 
-    PageInfo<BookVo> getBooksBySecondCateID(Integer id, Integer currentPage);
+    PageInfo<BookVo> getBooksBySecondCateIDAndCondition(Integer id,Integer condition, Integer currentPage);
 
-    PageInfo<BookVo> getBooksByFirstCateID(Integer id,Integer currentPage);
+    PageInfo<BookVo> getBooksByFirstCateIDAndCondition(Integer id,Integer condition,Integer currentPage);
 
-    PageInfo<BookVo> getAllBook(Integer currentPage);
+    PageInfo<BookVo> getAllBookByCondition(Integer currentPage,Integer condition);
+
 }

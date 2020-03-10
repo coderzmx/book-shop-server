@@ -2,6 +2,7 @@ package com.ncuedu.bookshopserver.mapper;
 
 import com.ncuedu.bookshopserver.pojo.Book;
 import com.ncuedu.bookshopserver.pojo.vo.BookVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -12,9 +13,10 @@ import java.util.List;
  **/
 public interface BookVoMapper {
 
-    List<BookVo> selectAll();
+    List<BookVo> selectAllByCondition(Integer condition);
 
-    List<BookVo> selectBySecondCateId(Integer id);
+    List<BookVo> selectBySecondCateIdAndCondition(@Param("id") Integer id,@Param("condition") Integer condition);
 
-    List<BookVo> selectByFirstCateId(List<Integer> ids);
+    List<BookVo> selectByFirstCateIdAndCondition(List<Integer> ids,@Param("condition") Integer condition);
+
 }

@@ -16,13 +16,5 @@ class BookShopServerApplicationTests {
     @Resource
     private BookVoMapper bookVoMapper;
 
-    @Test
-    void test(){
-        List<Integer> ids=new ArrayList<>();
-        ids.add(28);
-        ids.add(29);
-        List<BookVo> bookVos = bookVoMapper.selectByFirstCateId(ids);
-        System.out.println(bookVos.size());
-    }
 
 }

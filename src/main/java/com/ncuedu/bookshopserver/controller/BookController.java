@@ -19,18 +19,18 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @GetMapping("/book/booksByCate")
-    public PageInfo<BookVo> getBooksByCate(Integer id, Integer currentPage){
-        return bookService.getBooksBySecondCateID(id,currentPage);
+    @GetMapping("/book/booksByCateAndCondition")
+    public PageInfo<BookVo> getBooksByCateAndCondition(Integer id,Integer condition, Integer currentPage){
+        return bookService.getBooksBySecondCateIDAndCondition(id,condition,currentPage);
     }
 
-    @GetMapping("/book/booksByFirstCate")
-    public PageInfo<BookVo> getBooksByFirstCate(Integer id, Integer currentPage){
-        return bookService.getBooksByFirstCateID(id,currentPage);
+    @GetMapping("/book/booksByFirstCateAndCondition")
+    public PageInfo<BookVo> getBooksByFirstCate(Integer id,Integer condition, Integer currentPage){
+        return bookService.getBooksByFirstCateIDAndCondition(id,condition,currentPage);
     }
 
-    @GetMapping("/book/allBook")
-    public PageInfo<BookVo> getAllBook(Integer currentPage){
-        return bookService.getAllBook(currentPage);
+    @GetMapping("/book/bookByCondition")
+    public PageInfo<BookVo> getBookByCindition(Integer currentPage,Integer condition){
+        return bookService.getAllBookByCondition(currentPage,condition);
     }
 }

@@ -35,15 +35,15 @@ public class BookServiceImpl implements BookService {
     private CateMapper cateMapper;
 
     @Override
-    public PageInfo<BookVo> getBooksBySecondCateID(Integer id, Integer currentPage) {
+    public PageInfo<BookVo> getBooksBySecondCateIDAndCondition(Integer id,Integer condition, Integer currentPage) {
         if (currentPage==null) currentPage=1;
         PageHelper.startPage(currentPage, Define.PAGE_SIZE);
-        PageInfo<BookVo> pageInfo=new PageInfo<>(bookVoMapper.selectBySecondCateId(id));
+        PageInfo<BookVo> pageInfo=new PageInfo<>(bookVoMapper.selectBySecondCateIdAndCondition(id,condition));
         return pageInfo;
     }
 
     @Override
-    public PageInfo<BookVo> getBooksByFirstCateID(Integer id, Integer currentPage) {
+    public PageInfo<BookVo> getBooksByFirstCateIDAndCondition(Integer id,Integer condition, Integer currentPage) {
         if (currentPage==null) currentPage=1;
         CateExample cateExample = new CateExample();
         CateExample.Criteria criteria = cateExample.createCriteria();
@@ -52,15 +52,15 @@ public class BookServiceImpl implements BookService {
         List<Integer> ids=new ArrayList<>();
         cates.forEach((cate)->{ids.add(cate.getCateId());});
         PageHelper.startPage(currentPage,Define.PAGE_SIZE);
-        PageInfo<BookVo> pageInfo=new PageInfo<>(bookVoMapper.selectByFirstCateId(ids));
+        PageInfo<BookVo> pageInfo=new PageInfo<>(bookVoMapper.selectByFirstCateIdAndCondition(ids,condition));
         return pageInfo;
     }
 
     @Override
-    public PageInfo<BookVo> getAllBook(Integer currentPage) {
+    public PageInfo<BookVo> getAllBookByCondition(Integer currentPage, Integer condition) {
         if(currentPage==null) currentPage=1;
         PageHelper.startPage(currentPage,Define.PAGE_SIZE);
-        PageInfo<BookVo> pageInfo=new PageInfo<>(bookVoMapper.selectAll());
+        PageInfo<BookVo> pageInfo=new PageInfo<>(bookVoMapper.selectAllByCondition(condition));
         return pageInfo;
     }
 }

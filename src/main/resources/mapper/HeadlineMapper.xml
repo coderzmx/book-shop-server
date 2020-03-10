@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncuedu.bookshopserver.mapper.HeadlineMapper">
+  <resultMap id="BaseResultMap" type="com.ncuedu.bookshopserver.pojo.Headline">
+    <id column="headline_id" jdbcType="INTEGER" property="headlineId" />
+    <result column="headline_content" jdbcType="VARCHAR" property="headlineContent" />
+    <result column="headline_img" jdbcType="VARCHAR" property="headlineImg" />
+    <result column="headline_time" jdbcType="TIMESTAMP" property="headlineTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    headline_id, headline_content, headline_img, headline_time
+  </sql>
+  <select id="selectByExample" parameterType="com.ncuedu.bookshopserver.pojo.HeadlineExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from headline
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from headline
+    where headline_id = #{headlineId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from headline
+    where headline_id = #{headlineId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ncuedu.bookshopserver.pojo.HeadlineExample">
+    delete from headline
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ncuedu.bookshopserver.pojo.Headline">
+    insert into headline (headline_id, headline_content, headline_img, 
+      headline_time)
+    values (#{headlineId,jdbcType=INTEGER}, #{headlineContent,jdbcType=VARCHAR}, #{headlineImg,jdbcType=VARCHAR}, 
+      #{headlineTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ncuedu.bookshopserver.pojo.Headline">
+    insert into headline
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="headlineId != null">
+        headline_id,
+      </if>
+      <if test="headlineContent != null">
+        headline_content,
+      </if>
+      <if test="headlineImg != null">
+        headline_img,
+      </if>
+      <if test="headlineTime != null">
+        headline_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="headlineId != null">
+        #{headlineId,jdbcType=INTEGER},
+      </if>
+      <if test="headlineContent != null">
+        #{headlineContent,jdbcType=VARCHAR},
+      </if>
+      <if test="headlineImg != null">
+        #{headlineImg,jdbcType=VARCHAR},
+      </if>
+      <if test="headlineTime != null">
+        #{headlineTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ncuedu.bookshopserver.pojo.HeadlineExample" resultType="java.lang.Long">
+    select count(*) from headline
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update headline
+    <set>
+      <if test="record.headlineId != null">
+        headline_id = #{record.headlineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.headlineContent != null">
+        headline_content = #{record.headlineContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headlineImg != null">
+        headline_img = #{record.headlineImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headlineTime != null">
+        headline_time = #{record.headlineTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update headline
+    set headline_id = #{record.headlineId,jdbcType=INTEGER},
+      headline_content = #{record.headlineContent,jdbcType=VARCHAR},
+      headline_img = #{record.headlineImg,jdbcType=VARCHAR},
+      headline_time = #{record.headlineTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ncuedu.bookshopserver.pojo.Headline">
+    update headline
+    <set>
+      <if test="headlineContent != null">
+        headline_content = #{headlineContent,jdbcType=VARCHAR},
+      </if>
+      <if test="headlineImg != null">
+        headline_img = #{headlineImg,jdbcType=VARCHAR},
+      </if>
+      <if test="headlineTime != null">
+        headline_time = #{headlineTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where headline_id = #{headlineId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ncuedu.bookshopserver.pojo.Headline">
+    update headline
+    set headline_content = #{headlineContent,jdbcType=VARCHAR},
+      headline_img = #{headlineImg,jdbcType=VARCHAR},
+      headline_time = #{headlineTime,jdbcType=TIMESTAMP}
+    where headline_id = #{headlineId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectLatestHeadlines" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from headline ORDER BY headline_time desc;
+  </select>
+</mapper>

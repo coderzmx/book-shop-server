@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncuedu.bookshopserver.mapper.BookVoMapper">
+  <resultMap id="BaseResultMap" type="com.ncuedu.bookshopserver.pojo.vo.BookVo">
+    <id column="book_id" jdbcType="INTEGER" property="bookId" />
+    <result column="book_title" jdbcType="VARCHAR" property="bookTitle" />
+    <result column="book_stock" jdbcType="INTEGER" property="bookStock" />
+    <result column="book_orderprice" jdbcType="DECIMAL" property="bookOrderprice" />
+    <result column="book_saleprice" jdbcType="DECIMAL" property="bookSaleprice" />
+    <result column="book_salevolume" jdbcType="INTEGER" property="bookSalevolume" />
+    <result column="book_shelftime" jdbcType="TIMESTAMP" property="bookShelftime" />
+    <result column="book_presstime" jdbcType="TIMESTAMP" property="bookPresstime" />
+    <result column="book_isbn" jdbcType="VARCHAR" property="bookIsbn" />
+    <result column="book_press" jdbcType="VARCHAR" property="bookPress" />
+    <result column="book_des" jdbcType="VARCHAR" property="bookDes" />
+    <result column="author_id" jdbcType="INTEGER" property="authorId" />
+    <result column="book_img" jdbcType="VARCHAR" property="bookImg" />
+    <result column="cate_id" jdbcType="INTEGER" property="cateId" />
+    <result column="book_flag" jdbcType="INTEGER" property="bookFlag" />
+    <result column="book_recommend" jdbcType="VARCHAR" property="bookRecommend" />
+    <result column="author_name" jdbcType="VARCHAR" property="authorName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    book_id, book_title, book_stock, book_orderprice, book_saleprice, book_salevolume, 
+    book_shelftime, book_presstime, book_isbn, book_press, book_des, book.author_id, book_img,
+    cate_id, book_flag, book_recommend,author_name
+  </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from book left join author
+    on book.author_id=author.author_id
+  </select>
+
+  <select id="selectBySecondCateId" resultMap="BaseResultMap" parameterType="int">
+    select
+    <include refid="Base_Column_List" />
+    from book left join author
+    on book.author_id=author.author_id
+    where book.cate_id=#{id}
+  </select>
+
+  <select id="selectByFirstCateId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from book left join author
+    on book.author_id=author.author_id
+    where book.cate_id in
+    <foreach collection="list" open="(" separator="," close=")" item="id">
+      #{id}
+    </foreach>
+  </select>
+
+</mapper>

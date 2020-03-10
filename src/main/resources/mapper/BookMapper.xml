@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncuedu.bookshopserver.mapper.BookMapper">
+  <resultMap id="BaseResultMap" type="com.ncuedu.bookshopserver.pojo.Book">
+    <id column="book_id" jdbcType="INTEGER" property="bookId" />
+    <result column="book_title" jdbcType="VARCHAR" property="bookTitle" />
+    <result column="book_stock" jdbcType="INTEGER" property="bookStock" />
+    <result column="book_orderprice" jdbcType="DECIMAL" property="bookOrderprice" />
+    <result column="book_saleprice" jdbcType="DECIMAL" property="bookSaleprice" />
+    <result column="book_salevolume" jdbcType="INTEGER" property="bookSalevolume" />
+    <result column="book_shelftime" jdbcType="TIMESTAMP" property="bookShelftime" />
+    <result column="book_presstime" jdbcType="TIMESTAMP" property="bookPresstime" />
+    <result column="book_isbn" jdbcType="VARCHAR" property="bookIsbn" />
+    <result column="book_press" jdbcType="VARCHAR" property="bookPress" />
+    <result column="book_des" jdbcType="VARCHAR" property="bookDes" />
+    <result column="author_id" jdbcType="INTEGER" property="authorId" />
+    <result column="book_img" jdbcType="VARCHAR" property="bookImg" />
+    <result column="cate_id" jdbcType="INTEGER" property="cateId" />
+    <result column="book_flag" jdbcType="INTEGER" property="bookFlag" />
+    <result column="book_recommend" jdbcType="VARCHAR" property="bookRecommend" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    book_id, book_title, book_stock, book_orderprice, book_saleprice, book_salevolume, 
+    book_shelftime, book_presstime, book_isbn, book_press, book_des, author_id, book_img, 
+    cate_id, book_flag, book_recommend
+  </sql>
+  <select id="selectByExample" parameterType="com.ncuedu.bookshopserver.pojo.BookExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from book
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from book
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from book
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ncuedu.bookshopserver.pojo.BookExample">
+    delete from book
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ncuedu.bookshopserver.pojo.Book">
+    insert into book (book_id, book_title, book_stock, 
+      book_orderprice, book_saleprice, book_salevolume, 
+      book_shelftime, book_presstime, book_isbn, 
+      book_press, book_des, author_id, 
+      book_img, cate_id, book_flag, 
+      book_recommend)
+    values (#{bookId,jdbcType=INTEGER}, #{bookTitle,jdbcType=VARCHAR}, #{bookStock,jdbcType=INTEGER}, 
+      #{bookOrderprice,jdbcType=DECIMAL}, #{bookSaleprice,jdbcType=DECIMAL}, #{bookSalevolume,jdbcType=INTEGER}, 
+      #{bookShelftime,jdbcType=TIMESTAMP}, #{bookPresstime,jdbcType=TIMESTAMP}, #{bookIsbn,jdbcType=VARCHAR}, 
+      #{bookPress,jdbcType=VARCHAR}, #{bookDes,jdbcType=VARCHAR}, #{authorId,jdbcType=INTEGER}, 
+      #{bookImg,jdbcType=VARCHAR}, #{cateId,jdbcType=INTEGER}, #{bookFlag,jdbcType=INTEGER}, 
+      #{bookRecommend,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ncuedu.bookshopserver.pojo.Book">
+    insert into book
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bookId != null">
+        book_id,
+      </if>
+      <if test="bookTitle != null">
+        book_title,
+      </if>
+      <if test="bookStock != null">
+        book_stock,
+      </if>
+      <if test="bookOrderprice != null">
+        book_orderprice,
+      </if>
+      <if test="bookSaleprice != null">
+        book_saleprice,
+      </if>
+      <if test="bookSalevolume != null">
+        book_salevolume,
+      </if>
+      <if test="bookShelftime != null">
+        book_shelftime,
+      </if>
+      <if test="bookPresstime != null">
+        book_presstime,
+      </if>
+      <if test="bookIsbn != null">
+        book_isbn,
+      </if>
+      <if test="bookPress != null">
+        book_press,
+      </if>
+      <if test="bookDes != null">
+        book_des,
+      </if>
+      <if test="authorId != null">
+        author_id,
+      </if>
+      <if test="bookImg != null">
+        book_img,
+      </if>
+      <if test="cateId != null">
+        cate_id,
+      </if>
+      <if test="bookFlag != null">
+        book_flag,
+      </if>
+      <if test="bookRecommend != null">
+        book_recommend,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bookId != null">
+        #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="bookTitle != null">
+        #{bookTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bookStock != null">
+        #{bookStock,jdbcType=INTEGER},
+      </if>
+      <if test="bookOrderprice != null">
+        #{bookOrderprice,jdbcType=DECIMAL},
+      </if>
+      <if test="bookSaleprice != null">
+        #{bookSaleprice,jdbcType=DECIMAL},
+      </if>
+      <if test="bookSalevolume != null">
+        #{bookSalevolume,jdbcType=INTEGER},
+      </if>
+      <if test="bookShelftime != null">
+        #{bookShelftime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bookPresstime != null">
+        #{bookPresstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bookIsbn != null">
+        #{bookIsbn,jdbcType=VARCHAR},
+      </if>
+      <if test="bookPress != null">
+        #{bookPress,jdbcType=VARCHAR},
+      </if>
+      <if test="bookDes != null">
+        #{bookDes,jdbcType=VARCHAR},
+      </if>
+      <if test="authorId != null">
+        #{authorId,jdbcType=INTEGER},
+      </if>
+      <if test="bookImg != null">
+        #{bookImg,jdbcType=VARCHAR},
+      </if>
+      <if test="cateId != null">
+        #{cateId,jdbcType=INTEGER},
+      </if>
+      <if test="bookFlag != null">
+        #{bookFlag,jdbcType=INTEGER},
+      </if>
+      <if test="bookRecommend != null">
+        #{bookRecommend,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ncuedu.bookshopserver.pojo.BookExample" resultType="java.lang.Long">
+    select count(*) from book
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update book
+    <set>
+      <if test="record.bookId != null">
+        book_id = #{record.bookId,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookTitle != null">
+        book_title = #{record.bookTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bookStock != null">
+        book_stock = #{record.bookStock,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookOrderprice != null">
+        book_orderprice = #{record.bookOrderprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bookSaleprice != null">
+        book_saleprice = #{record.bookSaleprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bookSalevolume != null">
+        book_salevolume = #{record.bookSalevolume,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookShelftime != null">
+        book_shelftime = #{record.bookShelftime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.bookPresstime != null">
+        book_presstime = #{record.bookPresstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.bookIsbn != null">
+        book_isbn = #{record.bookIsbn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bookPress != null">
+        book_press = #{record.bookPress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bookDes != null">
+        book_des = #{record.bookDes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authorId != null">
+        author_id = #{record.authorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookImg != null">
+        book_img = #{record.bookImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cateId != null">
+        cate_id = #{record.cateId,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookFlag != null">
+        book_flag = #{record.bookFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookRecommend != null">
+        book_recommend = #{record.bookRecommend,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update book
+    set book_id = #{record.bookId,jdbcType=INTEGER},
+      book_title = #{record.bookTitle,jdbcType=VARCHAR},
+      book_stock = #{record.bookStock,jdbcType=INTEGER},
+      book_orderprice = #{record.bookOrderprice,jdbcType=DECIMAL},
+      book_saleprice = #{record.bookSaleprice,jdbcType=DECIMAL},
+      book_salevolume = #{record.bookSalevolume,jdbcType=INTEGER},
+      book_shelftime = #{record.bookShelftime,jdbcType=TIMESTAMP},
+      book_presstime = #{record.bookPresstime,jdbcType=TIMESTAMP},
+      book_isbn = #{record.bookIsbn,jdbcType=VARCHAR},
+      book_press = #{record.bookPress,jdbcType=VARCHAR},
+      book_des = #{record.bookDes,jdbcType=VARCHAR},
+      author_id = #{record.authorId,jdbcType=INTEGER},
+      book_img = #{record.bookImg,jdbcType=VARCHAR},
+      cate_id = #{record.cateId,jdbcType=INTEGER},
+      book_flag = #{record.bookFlag,jdbcType=INTEGER},
+      book_recommend = #{record.bookRecommend,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ncuedu.bookshopserver.pojo.Book">
+    update book
+    <set>
+      <if test="bookTitle != null">
+        book_title = #{bookTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bookStock != null">
+        book_stock = #{bookStock,jdbcType=INTEGER},
+      </if>
+      <if test="bookOrderprice != null">
+        book_orderprice = #{bookOrderprice,jdbcType=DECIMAL},
+      </if>
+      <if test="bookSaleprice != null">
+        book_saleprice = #{bookSaleprice,jdbcType=DECIMAL},
+      </if>
+      <if test="bookSalevolume != null">
+        book_salevolume = #{bookSalevolume,jdbcType=INTEGER},
+      </if>
+      <if test="bookShelftime != null">
+        book_shelftime = #{bookShelftime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bookPresstime != null">
+        book_presstime = #{bookPresstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bookIsbn != null">
+        book_isbn = #{bookIsbn,jdbcType=VARCHAR},
+      </if>
+      <if test="bookPress != null">
+        book_press = #{bookPress,jdbcType=VARCHAR},
+      </if>
+      <if test="bookDes != null">
+        book_des = #{bookDes,jdbcType=VARCHAR},
+      </if>
+      <if test="authorId != null">
+        author_id = #{authorId,jdbcType=INTEGER},
+      </if>
+      <if test="bookImg != null">
+        book_img = #{bookImg,jdbcType=VARCHAR},
+      </if>
+      <if test="cateId != null">
+        cate_id = #{cateId,jdbcType=INTEGER},
+      </if>
+      <if test="bookFlag != null">
+        book_flag = #{bookFlag,jdbcType=INTEGER},
+      </if>
+      <if test="bookRecommend != null">
+        book_recommend = #{bookRecommend,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ncuedu.bookshopserver.pojo.Book">
+    update book
+    set book_title = #{bookTitle,jdbcType=VARCHAR},
+      book_stock = #{bookStock,jdbcType=INTEGER},
+      book_orderprice = #{bookOrderprice,jdbcType=DECIMAL},
+      book_saleprice = #{bookSaleprice,jdbcType=DECIMAL},
+      book_salevolume = #{bookSalevolume,jdbcType=INTEGER},
+      book_shelftime = #{bookShelftime,jdbcType=TIMESTAMP},
+      book_presstime = #{bookPresstime,jdbcType=TIMESTAMP},
+      book_isbn = #{bookIsbn,jdbcType=VARCHAR},
+      book_press = #{bookPress,jdbcType=VARCHAR},
+      book_des = #{bookDes,jdbcType=VARCHAR},
+      author_id = #{authorId,jdbcType=INTEGER},
+      book_img = #{bookImg,jdbcType=VARCHAR},
+      cate_id = #{cateId,jdbcType=INTEGER},
+      book_flag = #{bookFlag,jdbcType=INTEGER},
+      book_recommend = #{bookRecommend,jdbcType=VARCHAR}
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </update>
+</mapper>

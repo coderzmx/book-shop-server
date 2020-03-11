@@ -1,7 +1,6 @@
 package com.ncuedu.bookshopserver.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.ncuedu.bookshopserver.pojo.Book;
 import com.ncuedu.bookshopserver.pojo.vo.BookVo;
 import com.ncuedu.bookshopserver.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,10 +1,7 @@
 package com.ncuedu.bookshopserver.service;
 
 import com.github.pagehelper.PageInfo;
-import com.ncuedu.bookshopserver.pojo.Book;
 import com.ncuedu.bookshopserver.pojo.vo.BookVo;
-
-import java.util.List;
 
 /**
  * @Desc

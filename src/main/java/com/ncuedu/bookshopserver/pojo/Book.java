@@ -30,6 +30,10 @@ public class Book {
 
     private String bookImg;
 
+    private String bookImg2;
+
+    private String bookImg3;
+
     private Integer cateId;
 
     private Integer bookFlag;
@@ -138,6 +142,22 @@ public class Book {
 
     public void setBookImg(String bookImg) {
         this.bookImg = bookImg == null ? null : bookImg.trim();
+    }
+
+    public String getBookImg2() {
+        return bookImg2;
+    }
+
+    public void setBookImg2(String bookImg2) {
+        this.bookImg2 = bookImg2 == null ? null : bookImg2.trim();
+    }
+
+    public String getBookImg3() {
+        return bookImg3;
+    }
+
+    public void setBookImg3(String bookImg3) {
+        this.bookImg3 = bookImg3 == null ? null : bookImg3.trim();
     }
 
     public Integer getCateId() {

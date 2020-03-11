@@ -5,14 +5,11 @@ import com.github.pagehelper.PageInfo;
 import com.ncuedu.bookshopserver.mapper.BookMapper;
 import com.ncuedu.bookshopserver.mapper.BookVoMapper;
 import com.ncuedu.bookshopserver.mapper.CateMapper;
-import com.ncuedu.bookshopserver.pojo.Book;
-import com.ncuedu.bookshopserver.pojo.BookExample;
 import com.ncuedu.bookshopserver.pojo.Cate;
 import com.ncuedu.bookshopserver.pojo.CateExample;
 import com.ncuedu.bookshopserver.pojo.vo.BookVo;
 import com.ncuedu.bookshopserver.service.BookService;
 import com.ncuedu.bookshopserver.util.Define;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

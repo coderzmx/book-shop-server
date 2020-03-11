@@ -1,6 +1,5 @@
 package com.ncuedu.bookshopserver.mapper;
 
-import com.ncuedu.bookshopserver.pojo.Book;
 import com.ncuedu.bookshopserver.pojo.vo.BookVo;
 import org.apache.ibatis.annotations.Param;
 

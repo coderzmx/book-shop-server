@@ -15,6 +15,8 @@
     <result column="book_des" jdbcType="VARCHAR" property="bookDes" />
     <result column="author_id" jdbcType="INTEGER" property="authorId" />
     <result column="book_img" jdbcType="VARCHAR" property="bookImg" />
+    <result column="book_img2" jdbcType="VARCHAR" property="bookImg2" />
+    <result column="book_img3" jdbcType="VARCHAR" property="bookImg3" />
     <result column="cate_id" jdbcType="INTEGER" property="cateId" />
     <result column="book_flag" jdbcType="INTEGER" property="bookFlag" />
     <result column="book_recommend" jdbcType="VARCHAR" property="bookRecommend" />
@@ -23,7 +25,7 @@
   <sql id="Base_Column_List">
     book_id, book_title, book_stock, book_orderprice, book_saleprice, book_salevolume, 
     book_shelftime, book_presstime, book_isbn, book_press, book_des, book.author_id, book_img,
-    cate_id, book_flag, book_recommend,author_name
+    book_img2, book_img3, cate_id, book_flag, book_recommend
   </sql>
 
   <sql id="filterCondition">

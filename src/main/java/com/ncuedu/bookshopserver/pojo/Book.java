@@ -34,6 +34,8 @@ public class Book {
 
     private String bookImg3;
 
+    private String bookImg4;
+
     private Integer cateId;
 
     private Integer bookFlag;
@@ -158,6 +160,14 @@ public class Book {
 
     public void setBookImg3(String bookImg3) {
         this.bookImg3 = bookImg3 == null ? null : bookImg3.trim();
+    }
+
+    public String getBookImg4() {
+        return bookImg4;
+    }
+
+    public void setBookImg4(String bookImg4) {
+        this.bookImg4 = bookImg4 == null ? null : bookImg4.trim();
     }
 
     public Integer getCateId() {

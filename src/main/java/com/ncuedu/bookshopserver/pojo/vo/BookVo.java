@@ -12,4 +12,12 @@ import lombok.Data;
 public class BookVo extends Book {
 
     private String authorName;
+
+    @Override
+    public String toString() {
+        return "BookVo{" +
+                "authorName='" + authorName + '\'' +
+                super.toString()+
+                '}';
+    }
 }

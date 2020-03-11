@@ -1,6 +1,7 @@
 package com.ncuedu.bookshopserver.service;
 
 import com.github.pagehelper.PageInfo;
+import com.ncuedu.bookshopserver.pojo.vo.BookRankVo;
 import com.ncuedu.bookshopserver.pojo.vo.BookVo;
 
 /**
@@ -16,4 +17,7 @@ public interface BookService {
 
     PageInfo<BookVo> getAllBookByCondition(Integer currentPage,Integer condition);
 
+    BookVo getBookById(Integer id);
+
+    BookRankVo getBookRankByBookIdAndCateId(Integer bookId,Integer cateId);
 }

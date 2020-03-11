@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncuedu.bookshopserver.mapper.BookRankVoMapper">
+  <resultMap id="BaseResultMap" type="com.ncuedu.bookshopserver.pojo.vo.BookRankVo">
+    <result column="rank" jdbcType="INTEGER" property="rank" />
+    <result column="cate_name" jdbcType="VARCHAR" property="cateName" />
+  </resultMap>
+
+  <select id="selectByBookId" resultMap="BaseResultMap">
+    select rank,cate_name from
+    (
+    select book_id,book_title,cate_id,(@rownum:=@rownum+1) as 'rank' from book,(select @rownum:=0) r WHERE cate_id=#{cateId} order by book_salevolume desc
+    )s
+    left join cate on s.cate_id=cate.cate_id
+    WHERE book_id=#{bookId};
+  </select>
+
+</mapper>

@@ -17,6 +17,7 @@
     <result column="book_img" jdbcType="VARCHAR" property="bookImg" />
     <result column="book_img2" jdbcType="VARCHAR" property="bookImg2" />
     <result column="book_img3" jdbcType="VARCHAR" property="bookImg3" />
+    <result column="book_img4" jdbcType="VARCHAR" property="bookImg4" />
     <result column="cate_id" jdbcType="INTEGER" property="cateId" />
     <result column="book_flag" jdbcType="INTEGER" property="bookFlag" />
     <result column="book_recommend" jdbcType="VARCHAR" property="bookRecommend" />
@@ -82,7 +83,7 @@
   <sql id="Base_Column_List">
     book_id, book_title, book_stock, book_orderprice, book_saleprice, book_salevolume, 
     book_shelftime, book_presstime, book_isbn, book_press, book_des, author_id, book_img, 
-    book_img2, book_img3, cate_id, book_flag, book_recommend
+    book_img2, book_img3, book_img4, cate_id, book_flag, book_recommend
   </sql>
   <select id="selectByExample" parameterType="com.ncuedu.bookshopserver.pojo.BookExample" resultMap="BaseResultMap">
     select
@@ -120,15 +121,15 @@
       book_shelftime, book_presstime, book_isbn, 
       book_press, book_des, author_id, 
       book_img, book_img2, book_img3, 
-      cate_id, book_flag, book_recommend
-      )
+      book_img4, cate_id, book_flag, 
+      book_recommend)
     values (#{bookId,jdbcType=INTEGER}, #{bookTitle,jdbcType=VARCHAR}, #{bookStock,jdbcType=INTEGER}, 
       #{bookOrderprice,jdbcType=DECIMAL}, #{bookSaleprice,jdbcType=DECIMAL}, #{bookSalevolume,jdbcType=INTEGER}, 
       #{bookShelftime,jdbcType=TIMESTAMP}, #{bookPresstime,jdbcType=TIMESTAMP}, #{bookIsbn,jdbcType=VARCHAR}, 
       #{bookPress,jdbcType=VARCHAR}, #{bookDes,jdbcType=VARCHAR}, #{authorId,jdbcType=INTEGER}, 
       #{bookImg,jdbcType=VARCHAR}, #{bookImg2,jdbcType=VARCHAR}, #{bookImg3,jdbcType=VARCHAR}, 
-      #{cateId,jdbcType=INTEGER}, #{bookFlag,jdbcType=INTEGER}, #{bookRecommend,jdbcType=VARCHAR}
-      )
+      #{bookImg4,jdbcType=VARCHAR}, #{cateId,jdbcType=INTEGER}, #{bookFlag,jdbcType=INTEGER}, 
+      #{bookRecommend,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ncuedu.bookshopserver.pojo.Book">
     insert into book
@@ -177,6 +178,9 @@
       </if>
       <if test="bookImg3 != null">
         book_img3,
+      </if>
+      <if test="bookImg4 != null">
+        book_img4,
       </if>
       <if test="cateId != null">
         cate_id,
@@ -233,6 +237,9 @@
       </if>
       <if test="bookImg3 != null">
         #{bookImg3,jdbcType=VARCHAR},
+      </if>
+      <if test="bookImg4 != null">
+        #{bookImg4,jdbcType=VARCHAR},
       </if>
       <if test="cateId != null">
         #{cateId,jdbcType=INTEGER},
@@ -299,6 +306,9 @@
       <if test="record.bookImg3 != null">
         book_img3 = #{record.bookImg3,jdbcType=VARCHAR},
       </if>
+      <if test="record.bookImg4 != null">
+        book_img4 = #{record.bookImg4,jdbcType=VARCHAR},
+      </if>
       <if test="record.cateId != null">
         cate_id = #{record.cateId,jdbcType=INTEGER},
       </if>
@@ -330,6 +340,7 @@
       book_img = #{record.bookImg,jdbcType=VARCHAR},
       book_img2 = #{record.bookImg2,jdbcType=VARCHAR},
       book_img3 = #{record.bookImg3,jdbcType=VARCHAR},
+      book_img4 = #{record.bookImg4,jdbcType=VARCHAR},
       cate_id = #{record.cateId,jdbcType=INTEGER},
       book_flag = #{record.bookFlag,jdbcType=INTEGER},
       book_recommend = #{record.bookRecommend,jdbcType=VARCHAR}
@@ -382,6 +393,9 @@
       <if test="bookImg3 != null">
         book_img3 = #{bookImg3,jdbcType=VARCHAR},
       </if>
+      <if test="bookImg4 != null">
+        book_img4 = #{bookImg4,jdbcType=VARCHAR},
+      </if>
       <if test="cateId != null">
         cate_id = #{cateId,jdbcType=INTEGER},
       </if>
@@ -410,6 +424,7 @@
       book_img = #{bookImg,jdbcType=VARCHAR},
       book_img2 = #{bookImg2,jdbcType=VARCHAR},
       book_img3 = #{bookImg3,jdbcType=VARCHAR},
+      book_img4 = #{bookImg4,jdbcType=VARCHAR},
       cate_id = #{cateId,jdbcType=INTEGER},
       book_flag = #{bookFlag,jdbcType=INTEGER},
       book_recommend = #{bookRecommend,jdbcType=VARCHAR}

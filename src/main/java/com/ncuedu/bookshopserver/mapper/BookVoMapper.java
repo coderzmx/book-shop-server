@@ -18,4 +18,5 @@ public interface BookVoMapper {
 
     List<BookVo> selectByFirstCateIdAndCondition(List<Integer> ids,@Param("condition") Integer condition);
 
+    BookVo selectBookById(Integer id);
 }

@@ -3,10 +3,12 @@ package com.ncuedu.bookshopserver.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ncuedu.bookshopserver.mapper.BookMapper;
+import com.ncuedu.bookshopserver.mapper.BookRankVoMapper;
 import com.ncuedu.bookshopserver.mapper.BookVoMapper;
 import com.ncuedu.bookshopserver.mapper.CateMapper;
 import com.ncuedu.bookshopserver.pojo.Cate;
 import com.ncuedu.bookshopserver.pojo.CateExample;
+import com.ncuedu.bookshopserver.pojo.vo.BookRankVo;
 import com.ncuedu.bookshopserver.pojo.vo.BookVo;
 import com.ncuedu.bookshopserver.service.BookService;
 import com.ncuedu.bookshopserver.util.Define;
@@ -30,6 +32,9 @@ public class BookServiceImpl implements BookService {
     private BookVoMapper bookVoMapper;
     @Resource
     private CateMapper cateMapper;
+    @Resource
+    private BookRankVoMapper bookRankVoMapper;
+
 
     @Override
     public PageInfo<BookVo> getBooksBySecondCateIDAndCondition(Integer id,Integer condition, Integer currentPage) {
@@ -59,5 +64,15 @@ public class BookServiceImpl implements BookService {
         PageHelper.startPage(currentPage,Define.PAGE_SIZE);
         PageInfo<BookVo> pageInfo=new PageInfo<>(bookVoMapper.selectAllByCondition(condition));
         return pageInfo;
+    }
+
+    @Override
+    public BookVo getBookById(Integer id) {
+        return bookVoMapper.selectBookById(id);
+    }
+
+    @Override
+    public BookRankVo getBookRankByBookIdAndCateId(Integer bookId, Integer cateId) {
+        return bookRankVoMapper.selectByBookId(bookId,cateId);
     }
 }

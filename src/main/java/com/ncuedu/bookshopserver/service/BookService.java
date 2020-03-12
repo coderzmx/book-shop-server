@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.ncuedu.bookshopserver.pojo.vo.BookRankVo;
 import com.ncuedu.bookshopserver.pojo.vo.BookVo;
 
+import java.util.List;
+
 /**
  * @Desc
  * @Author zhang
@@ -20,4 +22,6 @@ public interface BookService {
     BookVo getBookById(Integer id);
 
     BookRankVo getBookRankByBookIdAndCateId(Integer bookId,Integer cateId);
+
+    List<BookVo> getOtherTopRankBookByCateId(Integer cateId,Integer bookId);
 }

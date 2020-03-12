@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @SpringBootTest
 class BookShopServerApplicationTests {
@@ -20,8 +21,8 @@ class BookShopServerApplicationTests {
 
     @Test
     public void test(){
-        BookRankVo bookRankVo = bookRankVoMapper.selectByBookId(8, 28);
-        System.out.println(bookRankVo);
+        List<BookVo> bookVos = bookVoMapper.selectOtherTopRankBookByCateId(28, 1);
+        System.out.println(bookVos);
     }
 
 }

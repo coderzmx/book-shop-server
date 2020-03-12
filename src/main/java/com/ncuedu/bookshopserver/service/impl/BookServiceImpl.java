@@ -75,4 +75,9 @@ public class BookServiceImpl implements BookService {
     public BookRankVo getBookRankByBookIdAndCateId(Integer bookId, Integer cateId) {
         return bookRankVoMapper.selectByBookId(bookId,cateId);
     }
+
+    @Override
+    public List<BookVo> getOtherTopRankBookByCateId(Integer cateId, Integer bookId) {
+        return bookVoMapper.selectOtherTopRankBookByCateId(cateId,bookId);
+    }
 }

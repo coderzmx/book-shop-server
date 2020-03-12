@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @Desc
  * @Author zhang
@@ -42,5 +44,10 @@ public class BookController {
     @GetMapping("/book/rank")
     public BookRankVo getBookRank(Integer bookId,Integer cateId){
         return bookService.getBookRankByBookIdAndCateId(bookId,cateId);
+    }
+
+    @GetMapping("/book/otherTopRankBook")
+    public List<BookVo> getOtherTopRankBookByCateId(Integer cateId,Integer bookId){
+        return bookService.getOtherTopRankBookByCateId(cateId,bookId);
     }
 }

@@ -77,4 +77,12 @@
     on book.author_id=author.author_id
     where book_id=#{id}
   </select>
+
+  <select id="selectOtherTopRankBookByCateId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from book left join author
+    on book.author_id=author.author_id
+    WHERE cate_id=#{cateId} and book_id!=#{bookId} ORDER BY book_salevolume desc LIMIT 0,4;
+  </select>
 </mapper>

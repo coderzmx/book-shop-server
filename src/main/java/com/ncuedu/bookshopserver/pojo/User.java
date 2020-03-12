@@ -23,6 +23,10 @@ public class User implements Serializable {
 
     private String userDes;
 
+    private String userNickname;
+
+    private String userImg;
+
     public User(String userName, String userPassword, String userTel) {
         this.userName = userName;
         this.userPassword = userPassword;

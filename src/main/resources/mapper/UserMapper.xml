@@ -10,6 +10,8 @@
     <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
     <result column="user_money" jdbcType="DECIMAL" property="userMoney" />
     <result column="user_des" jdbcType="VARCHAR" property="userDes" />
+    <result column="user_nickname" jdbcType="VARCHAR" property="userNickname" />
+    <result column="user_img" jdbcType="VARCHAR" property="userImg" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_id, user_name, user_password, user_sex, user_tel, user_email, user_money, user_des
+    user_id, user_name, user_password, user_sex, user_tel, user_email, user_money, user_des, 
+    user_nickname, user_img
   </sql>
   <select id="selectByExample" parameterType="com.ncuedu.bookshopserver.pojo.UserExample" resultMap="BaseResultMap">
     select
@@ -105,10 +108,12 @@
   <insert id="insert" parameterType="com.ncuedu.bookshopserver.pojo.User">
     insert into user (user_id, user_name, user_password, 
       user_sex, user_tel, user_email, 
-      user_money, user_des)
+      user_money, user_des, user_nickname, 
+      user_img)
     values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
       #{userSex,jdbcType=VARCHAR}, #{userTel,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, 
-      #{userMoney,jdbcType=DECIMAL}, #{userDes,jdbcType=VARCHAR})
+      #{userMoney,jdbcType=DECIMAL}, #{userDes,jdbcType=VARCHAR}, #{userNickname,jdbcType=VARCHAR}, 
+      #{userImg,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ncuedu.bookshopserver.pojo.User">
     insert into user
@@ -137,6 +142,12 @@
       <if test="userDes != null">
         user_des,
       </if>
+      <if test="userNickname != null">
+        user_nickname,
+      </if>
+      <if test="userImg != null">
+        user_img,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -162,6 +173,12 @@
       </if>
       <if test="userDes != null">
         #{userDes,jdbcType=VARCHAR},
+      </if>
+      <if test="userNickname != null">
+        #{userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="userImg != null">
+        #{userImg,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -198,6 +215,12 @@
       <if test="record.userDes != null">
         user_des = #{record.userDes,jdbcType=VARCHAR},
       </if>
+      <if test="record.userNickname != null">
+        user_nickname = #{record.userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userImg != null">
+        user_img = #{record.userImg,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -212,7 +235,9 @@
       user_tel = #{record.userTel,jdbcType=VARCHAR},
       user_email = #{record.userEmail,jdbcType=VARCHAR},
       user_money = #{record.userMoney,jdbcType=DECIMAL},
-      user_des = #{record.userDes,jdbcType=VARCHAR}
+      user_des = #{record.userDes,jdbcType=VARCHAR},
+      user_nickname = #{record.userNickname,jdbcType=VARCHAR},
+      user_img = #{record.userImg,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -241,6 +266,12 @@
       <if test="userDes != null">
         user_des = #{userDes,jdbcType=VARCHAR},
       </if>
+      <if test="userNickname != null">
+        user_nickname = #{userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="userImg != null">
+        user_img = #{userImg,jdbcType=VARCHAR},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
@@ -252,7 +283,9 @@
       user_tel = #{userTel,jdbcType=VARCHAR},
       user_email = #{userEmail,jdbcType=VARCHAR},
       user_money = #{userMoney,jdbcType=DECIMAL},
-      user_des = #{userDes,jdbcType=VARCHAR}
+      user_des = #{userDes,jdbcType=VARCHAR},
+      user_nickname = #{userNickname,jdbcType=VARCHAR},
+      user_img = #{userImg,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -50,4 +50,9 @@ public class CommentServiceImpl implements CommentService {
         PageInfo<CommentVo> comments=new PageInfo<>(commentVoMapper.selectByFilterCondition(condition,bookId));
         return comments;
     }
+
+    @Override
+    public Integer addCommentPraise(Comment comment) {
+        return commentMapper.updateByPrimaryKeySelective(comment);
+    }
 }

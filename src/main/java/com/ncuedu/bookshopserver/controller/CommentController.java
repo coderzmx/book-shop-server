@@ -1,10 +1,13 @@
 package com.ncuedu.bookshopserver.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.ncuedu.bookshopserver.pojo.Comment;
 import com.ncuedu.bookshopserver.pojo.vo.CommentVo;
 import com.ncuedu.bookshopserver.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
@@ -28,5 +31,10 @@ public class CommentController {
     @GetMapping("/comment/filter")
     public PageInfo<CommentVo> getCommentByFilterCondition(Integer condition,Integer bookId,Integer currentPage){
         return commentService.getCommentByCondition(condition,bookId,currentPage);
+    }
+
+    @PostMapping("/comment/addPraise")
+    public Integer addCommentPraise(@RequestBody Comment comment){
+        return commentService.addCommentPraise(comment);
     }
 }

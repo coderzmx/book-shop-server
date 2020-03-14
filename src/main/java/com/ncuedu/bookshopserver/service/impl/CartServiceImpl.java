@@ -9,6 +9,7 @@ import com.ncuedu.bookshopserver.service.CartService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -33,6 +34,7 @@ public class CartServiceImpl implements CartService {
         else {
             Cart cart1 = carts.get(0);
             cart1.setCartAmount(cart1.getCartAmount()+1);
+            cart1.setCartPrice(cart1.getBookSaleprice().multiply(new BigDecimal(cart1.getCartAmount())));
             return cartMapper.updateByPrimaryKeySelective(cart1);
         }
     }
@@ -43,5 +45,32 @@ public class CartServiceImpl implements CartService {
         cartExample.or().andUserIdEqualTo(userId);
         List<CartVo> carts = cartVoMapper.selectCartsByUserId(userId);
         return carts;
+    }
+
+    @Override
+    public Integer deleteCart(Integer cartId) {
+        return cartMapper.deleteByPrimaryKey(cartId);
+    }
+
+    @Override
+    public Integer updateCart(Cart cart) {
+        return cartMapper.updateByPrimaryKeySelective(cart);
+    }
+
+    @Override
+    public Integer deleteCarts(List<Integer> ids) {
+        return cartMapper.deleteByIds(ids);
+    }
+
+    @Override
+    public Integer getCartAmount(Integer userId) {
+        CartExample cartExample = new CartExample();
+        cartExample.or().andUserIdEqualTo(userId);
+        List<Cart> carts = cartMapper.selectByExample(cartExample);
+        int result=0;
+        for (Cart cart : carts) {
+            result+=cart.getCartAmount();
+        }
+        return result;
     }
 }

@@ -14,7 +14,7 @@
   </resultMap>
 
   <sql id="Base_Column_List">
-    cart_id, user_id, cart.book_id, cart_amount, cart_time, cart_price,book_title,book_img,book_saleprice
+    cart_id, user_id, cart.book_id, cart_amount, cart_time, cart_price,book_title,book_img,book.book_saleprice
   </sql>
 
   <select id="selectCartsByUserId" resultMap="BaseResultMap">

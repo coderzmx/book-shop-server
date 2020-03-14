@@ -286,6 +286,66 @@ public class CartExample {
             return (Criteria) this;
         }
 
+        public Criteria andBookSalepriceIsNull() {
+            addCriterion("book_saleprice is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBookSalepriceIsNotNull() {
+            addCriterion("book_saleprice is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBookSalepriceEqualTo(BigDecimal value) {
+            addCriterion("book_saleprice =", value, "bookSaleprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andBookSalepriceNotEqualTo(BigDecimal value) {
+            addCriterion("book_saleprice <>", value, "bookSaleprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andBookSalepriceGreaterThan(BigDecimal value) {
+            addCriterion("book_saleprice >", value, "bookSaleprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andBookSalepriceGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("book_saleprice >=", value, "bookSaleprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andBookSalepriceLessThan(BigDecimal value) {
+            addCriterion("book_saleprice <", value, "bookSaleprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andBookSalepriceLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("book_saleprice <=", value, "bookSaleprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andBookSalepriceIn(List<BigDecimal> values) {
+            addCriterion("book_saleprice in", values, "bookSaleprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andBookSalepriceNotIn(List<BigDecimal> values) {
+            addCriterion("book_saleprice not in", values, "bookSaleprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andBookSalepriceBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("book_saleprice between", value1, value2, "bookSaleprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andBookSalepriceNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("book_saleprice not between", value1, value2, "bookSaleprice");
+            return (Criteria) this;
+        }
+
         public Criteria andCartAmountIsNull() {
             addCriterion("cart_amount is null");
             return (Criteria) this;

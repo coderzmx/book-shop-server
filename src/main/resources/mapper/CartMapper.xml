@@ -5,6 +5,7 @@
     <id column="cart_id" jdbcType="INTEGER" property="cartId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="book_id" jdbcType="INTEGER" property="bookId" />
+    <result column="book_saleprice" jdbcType="DECIMAL" property="bookSaleprice" />
     <result column="cart_amount" jdbcType="INTEGER" property="cartAmount" />
     <result column="cart_time" jdbcType="TIMESTAMP" property="cartTime" />
     <result column="cart_price" jdbcType="DECIMAL" property="cartPrice" />
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    cart_id, user_id, book_id, cart_amount, cart_time, cart_price
+    cart_id, user_id, book_id, book_saleprice, cart_amount, cart_time, cart_price
   </sql>
   <select id="selectByExample" parameterType="com.ncuedu.bookshopserver.pojo.CartExample" resultMap="BaseResultMap">
     select
@@ -102,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.ncuedu.bookshopserver.pojo.Cart">
     insert into cart (cart_id, user_id, book_id, 
-      cart_amount, cart_time, cart_price
-      )
+      book_saleprice, cart_amount, cart_time, 
+      cart_price)
     values (#{cartId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, 
-      #{cartAmount,jdbcType=INTEGER}, #{cartTime,jdbcType=TIMESTAMP}, #{cartPrice,jdbcType=DECIMAL}
-      )
+      #{bookSaleprice,jdbcType=DECIMAL}, #{cartAmount,jdbcType=INTEGER}, #{cartTime,jdbcType=TIMESTAMP}, 
+      #{cartPrice,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.ncuedu.bookshopserver.pojo.Cart">
     insert into cart
@@ -119,6 +120,9 @@
       </if>
       <if test="bookId != null">
         book_id,
+      </if>
+      <if test="bookSaleprice != null">
+        book_saleprice,
       </if>
       <if test="cartAmount != null">
         cart_amount,
@@ -139,6 +143,9 @@
       </if>
       <if test="bookId != null">
         #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="bookSaleprice != null">
+        #{bookSaleprice,jdbcType=DECIMAL},
       </if>
       <if test="cartAmount != null">
         #{cartAmount,jdbcType=INTEGER},
@@ -169,6 +176,9 @@
       <if test="record.bookId != null">
         book_id = #{record.bookId,jdbcType=INTEGER},
       </if>
+      <if test="record.bookSaleprice != null">
+        book_saleprice = #{record.bookSaleprice,jdbcType=DECIMAL},
+      </if>
       <if test="record.cartAmount != null">
         cart_amount = #{record.cartAmount,jdbcType=INTEGER},
       </if>
@@ -188,6 +198,7 @@
     set cart_id = #{record.cartId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
       book_id = #{record.bookId,jdbcType=INTEGER},
+      book_saleprice = #{record.bookSaleprice,jdbcType=DECIMAL},
       cart_amount = #{record.cartAmount,jdbcType=INTEGER},
       cart_time = #{record.cartTime,jdbcType=TIMESTAMP},
       cart_price = #{record.cartPrice,jdbcType=DECIMAL}
@@ -203,6 +214,9 @@
       </if>
       <if test="bookId != null">
         book_id = #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="bookSaleprice != null">
+        book_saleprice = #{bookSaleprice,jdbcType=DECIMAL},
       </if>
       <if test="cartAmount != null">
         cart_amount = #{cartAmount,jdbcType=INTEGER},
@@ -220,9 +234,17 @@
     update cart
     set user_id = #{userId,jdbcType=INTEGER},
       book_id = #{bookId,jdbcType=INTEGER},
+      book_saleprice = #{bookSaleprice,jdbcType=DECIMAL},
       cart_amount = #{cartAmount,jdbcType=INTEGER},
       cart_time = #{cartTime,jdbcType=TIMESTAMP},
       cart_price = #{cartPrice,jdbcType=DECIMAL}
     where cart_id = #{cartId,jdbcType=INTEGER}
   </update>
+
+  <delete id="deleteByIds">
+    delete from cart where cart_id in
+    <foreach collection="list" item="id" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </delete>
 </mapper>

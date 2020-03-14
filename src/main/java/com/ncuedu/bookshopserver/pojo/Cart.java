@@ -13,6 +13,8 @@ public class Cart {
 
     private Integer bookId;
 
+    private BigDecimal bookSaleprice;
+
     private Integer cartAmount;
 
     private Date cartTime;

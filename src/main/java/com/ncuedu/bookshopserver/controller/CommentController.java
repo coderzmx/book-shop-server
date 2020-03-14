@@ -5,10 +5,7 @@ import com.ncuedu.bookshopserver.pojo.Comment;
 import com.ncuedu.bookshopserver.pojo.vo.CommentVo;
 import com.ncuedu.bookshopserver.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -28,12 +25,12 @@ public class CommentController {
         return commentService.getCommentCountByBookId(bookId);
     }
 
-    @GetMapping("/comment/filter")
+    @GetMapping("/comments")
     public PageInfo<CommentVo> getCommentByFilterCondition(Integer condition,Integer bookId,Integer currentPage){
         return commentService.getCommentByCondition(condition,bookId,currentPage);
     }
 
-    @PostMapping("/comment/addPraise")
+    @PutMapping("/comment/{id}")
     public Integer addCommentPraise(@RequestBody Comment comment){
         return commentService.addCommentPraise(comment);
     }

@@ -18,4 +18,6 @@ public interface UserService {
     boolean checkUserTel(String userTel);
 
     Integer insertUser(User user);
+
+    Integer updateUser(User user);
 }

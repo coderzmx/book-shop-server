@@ -6,10 +6,7 @@ import com.ncuedu.bookshopserver.service.UserService;
 import com.ncuedu.bookshopserver.util.GetMessageCode;
 import com.ncuedu.bookshopserver.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -90,5 +87,10 @@ public class UserController {
         }
         result.put("code",insertResult);
         return result;
+    }
+
+    @PutMapping("/user")
+    public Integer saveUser(@RequestBody User user){
+        return userService.updateUser(user);
     }
 }

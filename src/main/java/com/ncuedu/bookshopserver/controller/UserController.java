@@ -93,4 +93,10 @@ public class UserController {
     public Integer saveUser(@RequestBody User user){
         return userService.updateUser(user);
     }
+
+    @PostMapping("/user/checkCode")
+    public Integer checkCode(@RequestBody UserVo userVo){
+        String code=(String) redisUtil.get(userVo.getUserTel());
+        return code.equals(userVo.getCode())?1:0;
+    }
 }

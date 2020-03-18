@@ -6,6 +6,7 @@ import com.ncuedu.bookshopserver.pojo.vo.BookRankVo;
 import com.ncuedu.bookshopserver.pojo.vo.BookVo;
 import com.ncuedu.bookshopserver.pojo.vo.CartVo;
 import com.ncuedu.bookshopserver.pojo.vo.CommentVo;
+import com.ncuedu.bookshopserver.util.RandomNumber;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -33,9 +34,7 @@ class BookShopServerApplicationTests {
 
     @Test
     public void test(){
-        List<Integer> ids=new ArrayList<>();
-        ids.add(6);
-        cartMapper.deleteByIds(ids);
+
     }
 
 }

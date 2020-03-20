@@ -11,7 +11,7 @@ import java.util.List;
  * @CreateTime 2019/12/18 19:31
  **/
 public interface BookVoMapper {
-
+    //2销量，3售价，4出版时间
     List<BookVo> selectAllByCondition(Integer condition);
 
     List<BookVo> selectBySecondCateIdAndCondition(@Param("id") Integer id,@Param("condition") Integer condition);

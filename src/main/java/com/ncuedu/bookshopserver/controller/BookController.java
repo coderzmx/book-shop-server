@@ -50,4 +50,14 @@ public class BookController {
     public List<BookVo> getOtherTopRankBookByCateId(Integer cateId,Integer bookId){
         return bookService.getOtherTopRankBookByCateId(cateId,bookId);
     }
+
+    @GetMapping("/book/latest")
+    public List<BookVo> getLatestBook(){
+        return bookService.getLatestBook();
+    }
+
+    @GetMapping("/book/mostVolume")
+    public List<BookVo> getMostVolumeBook(){
+        return bookService.getMostVolumeBooks();
+    }
 }

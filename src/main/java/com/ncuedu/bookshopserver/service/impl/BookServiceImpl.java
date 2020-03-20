@@ -80,4 +80,18 @@ public class BookServiceImpl implements BookService {
     public List<BookVo> getOtherTopRankBookByCateId(Integer cateId, Integer bookId) {
         return bookVoMapper.selectOtherTopRankBookByCateId(cateId,bookId);
     }
+
+    @Override
+    public List<BookVo> getLatestBook() {
+        PageHelper.startPage(1,12);
+        List<BookVo> books=new PageInfo<BookVo>(bookVoMapper.selectAllByCondition(4)).getList();
+        return books;
+    }
+
+    @Override
+    public List<BookVo> getMostVolumeBooks() {
+        PageHelper.startPage(1,12);
+        List<BookVo> books=new PageInfo<BookVo>(bookVoMapper.selectAllByCondition(2)).getList();
+        return books;
+    }
 }

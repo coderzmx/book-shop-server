@@ -24,4 +24,8 @@ public interface BookService {
     BookRankVo getBookRankByBookIdAndCateId(Integer bookId,Integer cateId);
 
     List<BookVo> getOtherTopRankBookByCateId(Integer cateId,Integer bookId);
+
+    List<BookVo> getLatestBook();
+
+    List<BookVo> getMostVolumeBooks();
 }

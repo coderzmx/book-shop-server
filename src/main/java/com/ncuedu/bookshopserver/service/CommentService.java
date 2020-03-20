@@ -18,4 +18,8 @@ public interface CommentService {
     PageInfo<CommentVo> getCommentByCondition(Integer condition,Integer bookId,Integer currentPage);
 
     Integer addCommentPraise(Comment comment);
+
+    double getCommentAverage(Integer bookId);
+
+    Integer addComment(Comment comment);
 }

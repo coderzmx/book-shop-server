@@ -55,4 +55,23 @@ public class CommentServiceImpl implements CommentService {
     public Integer addCommentPraise(Comment comment) {
         return commentMapper.updateByPrimaryKeySelective(comment);
     }
+
+    @Override
+    public double getCommentAverage(Integer bookId) {
+        double totalGrade=0;
+        int totalCount=0;
+        CommentExample commentExample = new CommentExample();
+        commentExample.or().andBookIdEqualTo(bookId);
+        List<Comment> comments = commentMapper.selectByExample(commentExample);
+        for (Comment comment : comments) {
+            totalGrade+=comment.getCommentGrade();
+            totalCount++;
+        }
+        return totalGrade/totalCount;
+    }
+
+    @Override
+    public Integer addComment(Comment comment) {
+        return commentMapper.insertSelective(comment);
+    }
 }

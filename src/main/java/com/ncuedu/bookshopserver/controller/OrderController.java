@@ -1,8 +1,11 @@
 package com.ncuedu.bookshopserver.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.ncuedu.bookshopserver.pojo.Orderitem;
+import com.ncuedu.bookshopserver.pojo.vo.OrderVo;
 import com.ncuedu.bookshopserver.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,5 +31,10 @@ public class OrderController {
         Integer addressId= (Integer) map.get("addressId");
         List<Integer> cartIds= (List<Integer>) map.get("cartIds");
         return orderService.addOrder(orderitems,userId,addressId,cartIds);
+    }
+
+    @GetMapping("/orders")
+    public PageInfo<OrderVo> getOrdersByUserIdAndState(Integer userId,Integer state,Integer page){
+        return orderService.getOrderByUserId(userId,state,page);
     }
 }

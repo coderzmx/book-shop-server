@@ -34,4 +34,14 @@ public class CommentController {
     public Integer addCommentPraise(@RequestBody Comment comment){
         return commentService.addCommentPraise(comment);
     }
+
+    @GetMapping("/comment/average")
+    public double getCommentAveragr(Integer bookId){
+        return commentService.getCommentAverage(bookId);
+    }
+
+    @PostMapping("/comment")
+    public Integer addComment(@RequestBody Comment comment){
+        return commentService.addComment(comment);
+    }
 }

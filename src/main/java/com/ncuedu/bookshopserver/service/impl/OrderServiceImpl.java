@@ -1,13 +1,20 @@
 package com.ncuedu.bookshopserver.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.ncuedu.bookshopserver.mapper.CartMapper;
 import com.ncuedu.bookshopserver.mapper.OrderMapper;
 import com.ncuedu.bookshopserver.mapper.OrderitemMapper;
+import com.ncuedu.bookshopserver.mapper.OrderitemVoMapper;
 import com.ncuedu.bookshopserver.pojo.Cart;
 import com.ncuedu.bookshopserver.pojo.Order;
+import com.ncuedu.bookshopserver.pojo.OrderExample;
 import com.ncuedu.bookshopserver.pojo.Orderitem;
+import com.ncuedu.bookshopserver.pojo.vo.OrderVo;
+import com.ncuedu.bookshopserver.pojo.vo.OrderitemVo;
 import com.ncuedu.bookshopserver.service.OrderService;
+import com.ncuedu.bookshopserver.util.Define;
 import com.ncuedu.bookshopserver.util.RandomNumber;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +36,8 @@ public class OrderServiceImpl implements OrderService {
     private CartMapper cartMapper;
     @Resource
     private OrderitemMapper orderitemMapper;
+    @Resource
+    private OrderitemVoMapper orderitemVoMapper;
     @Override
     public Integer addOrder(List<Orderitem> orderitems,Integer userId,Integer addressId,List<Integer> cartIds) {
         Order order = new Order();
@@ -44,5 +53,17 @@ public class OrderServiceImpl implements OrderService {
         }
         cartMapper.deleteByIds(cartIds);
         return 1;
+    }
+
+    @Override
+    public PageInfo<OrderVo> getOrderByUserId(Integer userId,Integer state,Integer page) {
+        if(page==null) page=1;
+        PageHelper.startPage(page, Define.PAGE_SIZE);
+        PageInfo<OrderVo> orders=new PageInfo<>(orderMapper.selectOrderVoByUserIdAndOrderitemState(userId, state));
+        for (OrderVo order : orders.getList()) {
+            List<OrderitemVo> orderitems = orderitemVoMapper.selectOrderitemByOrderIdAndState(order.getOrderId(), state);
+            order.setOrderitems(orderitems);
+        }
+        return orders;
     }
 }

@@ -2,6 +2,7 @@ package com.ncuedu.bookshopserver.mapper;
 
 import com.ncuedu.bookshopserver.pojo.Order;
 import com.ncuedu.bookshopserver.pojo.OrderExample;
+import com.ncuedu.bookshopserver.pojo.vo.OrderVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -28,4 +29,6 @@ public interface OrderMapper {
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+
+    List<OrderVo> selectOrderVoByUserIdAndOrderitemState(@Param("userId") Integer userId,@Param("state") Integer state);
 }

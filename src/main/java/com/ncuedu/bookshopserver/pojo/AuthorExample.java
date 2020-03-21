@@ -234,6 +234,76 @@ public class AuthorExample {
             return (Criteria) this;
         }
 
+        public Criteria andAuthorImgIsNull() {
+            addCriterion("author_img is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthorImgIsNotNull() {
+            addCriterion("author_img is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthorImgEqualTo(String value) {
+            addCriterion("author_img =", value, "authorImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthorImgNotEqualTo(String value) {
+            addCriterion("author_img <>", value, "authorImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthorImgGreaterThan(String value) {
+            addCriterion("author_img >", value, "authorImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthorImgGreaterThanOrEqualTo(String value) {
+            addCriterion("author_img >=", value, "authorImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthorImgLessThan(String value) {
+            addCriterion("author_img <", value, "authorImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthorImgLessThanOrEqualTo(String value) {
+            addCriterion("author_img <=", value, "authorImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthorImgLike(String value) {
+            addCriterion("author_img like", value, "authorImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthorImgNotLike(String value) {
+            addCriterion("author_img not like", value, "authorImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthorImgIn(List<String> values) {
+            addCriterion("author_img in", values, "authorImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthorImgNotIn(List<String> values) {
+            addCriterion("author_img not in", values, "authorImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthorImgBetween(String value1, String value2) {
+            addCriterion("author_img between", value1, value2, "authorImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthorImgNotBetween(String value1, String value2) {
+            addCriterion("author_img not between", value1, value2, "authorImg");
+            return (Criteria) this;
+        }
+
         public Criteria andAuthorDesIsNull() {
             addCriterion("author_des is null");
             return (Criteria) this;

@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.ncuedu.bookshopserver.pojo.Author">
     <id column="author_id" jdbcType="INTEGER" property="authorId" />
     <result column="author_name" jdbcType="VARCHAR" property="authorName" />
+    <result column="author_img" jdbcType="VARCHAR" property="authorImg" />
     <result column="author_des" jdbcType="VARCHAR" property="authorDes" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -65,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    author_id, author_name, author_des
+    author_id, author_name, author_img, author_des
   </sql>
   <select id="selectByExample" parameterType="com.ncuedu.bookshopserver.pojo.AuthorExample" resultMap="BaseResultMap">
     select
@@ -98,10 +99,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ncuedu.bookshopserver.pojo.Author">
-    insert into author (author_id, author_name, author_des
-      )
-    values (#{authorId,jdbcType=INTEGER}, #{authorName,jdbcType=VARCHAR}, #{authorDes,jdbcType=VARCHAR}
-      )
+    insert into author (author_id, author_name, author_img, 
+      author_des)
+    values (#{authorId,jdbcType=INTEGER}, #{authorName,jdbcType=VARCHAR}, #{authorImg,jdbcType=VARCHAR}, 
+      #{authorDes,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ncuedu.bookshopserver.pojo.Author">
     insert into author
@@ -111,6 +112,9 @@
       </if>
       <if test="authorName != null">
         author_name,
+      </if>
+      <if test="authorImg != null">
+        author_img,
       </if>
       <if test="authorDes != null">
         author_des,
@@ -122,6 +126,9 @@
       </if>
       <if test="authorName != null">
         #{authorName,jdbcType=VARCHAR},
+      </if>
+      <if test="authorImg != null">
+        #{authorImg,jdbcType=VARCHAR},
       </if>
       <if test="authorDes != null">
         #{authorDes,jdbcType=VARCHAR},
@@ -143,6 +150,9 @@
       <if test="record.authorName != null">
         author_name = #{record.authorName,jdbcType=VARCHAR},
       </if>
+      <if test="record.authorImg != null">
+        author_img = #{record.authorImg,jdbcType=VARCHAR},
+      </if>
       <if test="record.authorDes != null">
         author_des = #{record.authorDes,jdbcType=VARCHAR},
       </if>
@@ -155,6 +165,7 @@
     update author
     set author_id = #{record.authorId,jdbcType=INTEGER},
       author_name = #{record.authorName,jdbcType=VARCHAR},
+      author_img = #{record.authorImg,jdbcType=VARCHAR},
       author_des = #{record.authorDes,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -166,6 +177,9 @@
       <if test="authorName != null">
         author_name = #{authorName,jdbcType=VARCHAR},
       </if>
+      <if test="authorImg != null">
+        author_img = #{authorImg,jdbcType=VARCHAR},
+      </if>
       <if test="authorDes != null">
         author_des = #{authorDes,jdbcType=VARCHAR},
       </if>
@@ -175,6 +189,7 @@
   <update id="updateByPrimaryKey" parameterType="com.ncuedu.bookshopserver.pojo.Author">
     update author
     set author_name = #{authorName,jdbcType=VARCHAR},
+      author_img = #{authorImg,jdbcType=VARCHAR},
       author_des = #{authorDes,jdbcType=VARCHAR}
     where author_id = #{authorId,jdbcType=INTEGER}
   </update>

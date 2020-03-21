@@ -5,6 +5,8 @@ public class Author {
 
     private String authorName;
 
+    private String authorImg;
+
     private String authorDes;
 
     public Integer getAuthorId() {
@@ -21,6 +23,14 @@ public class Author {
 
     public void setAuthorName(String authorName) {
         this.authorName = authorName == null ? null : authorName.trim();
+    }
+
+    public String getAuthorImg() {
+        return authorImg;
+    }
+
+    public void setAuthorImg(String authorImg) {
+        this.authorImg = authorImg == null ? null : authorImg.trim();
     }
 
     public String getAuthorDes() {

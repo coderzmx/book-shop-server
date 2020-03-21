@@ -32,13 +32,13 @@ public class CommentServiceImpl implements CommentService {
     public Map<String,Object> getCommentCountByBookId(Integer bookId) {
         Map<String,Object> result=new HashMap<>();
         CommentExample commentExample = new CommentExample();
-        commentExample.or().andBookIdEqualTo(1).andCommentGradeGreaterThan(3);
+        commentExample.or().andBookIdEqualTo(bookId).andCommentGradeGreaterThan(3);
         result.put("good",commentMapper.selectByExample(commentExample).size());
         CommentExample commentExample1 = new CommentExample();
-        commentExample1.or().andBookIdEqualTo(1).andCommentGradeEqualTo(3);
+        commentExample1.or().andBookIdEqualTo(bookId).andCommentGradeEqualTo(3);
         result.put("normal",commentMapper.selectByExample(commentExample1).size());
         CommentExample commentExample2 = new CommentExample();
-        commentExample2.or().andBookIdEqualTo(1).andCommentGradeLessThan(3);
+        commentExample2.or().andBookIdEqualTo(bookId).andCommentGradeLessThan(3);
         result.put("bad",commentMapper.selectByExample(commentExample2).size());
         return result;
     }

@@ -28,4 +28,6 @@ public interface BookMapper {
     int updateByPrimaryKeySelective(Book record);
 
     int updateByPrimaryKey(Book record);
+
+    List<Book> selectPopularBooksByAuthorId(@Param("authorId") Integer authorId,@Param("size") Integer size);
 }

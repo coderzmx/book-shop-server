@@ -430,4 +430,10 @@
       book_recommend = #{bookRecommend,jdbcType=VARCHAR}
     where book_id = #{bookId,jdbcType=INTEGER}
   </update>
+
+  <select id="selectPopularBooksByAuthorId" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from book
+    where author_id=#{authorId}
+    order by book_salevolume desc limit 0,#{size}
+  </select>
 </mapper>

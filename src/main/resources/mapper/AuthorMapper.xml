@@ -7,6 +7,12 @@
     <result column="author_img" jdbcType="VARCHAR" property="authorImg" />
     <result column="author_des" jdbcType="VARCHAR" property="authorDes" />
   </resultMap>
+  <resultMap id="AuthorVo" type="com.ncuedu.bookshopserver.pojo.vo.AuthorVo">
+    <id column="author_id" jdbcType="INTEGER" property="authorId" />
+    <result column="author_name" jdbcType="VARCHAR" property="authorName" />
+    <result column="author_img" jdbcType="VARCHAR" property="authorImg" />
+    <result column="author_des" jdbcType="VARCHAR" property="authorDes" />
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -193,4 +199,10 @@
       author_des = #{authorDes,jdbcType=VARCHAR}
     where author_id = #{authorId,jdbcType=INTEGER}
   </update>
+
+  <select id="selectMostPopularAuthor" resultMap="AuthorVo">
+    SELECT author.*,sum(book.book_salevolume)  FROM author
+    LEFT JOIN book on author.author_id=book.author_id
+    GROUP BY author_name ORDER BY sum(book.book_salevolume) desc LIMIT 0,#{size}
+  </select>
 </mapper>

@@ -1,6 +1,7 @@
 package com.ncuedu.bookshopserver;
 
 import com.ncuedu.bookshopserver.mapper.*;
+import com.ncuedu.bookshopserver.pojo.Book;
 import com.ncuedu.bookshopserver.pojo.Comment;
 import com.ncuedu.bookshopserver.pojo.vo.*;
 import com.ncuedu.bookshopserver.util.RandomNumber;
@@ -27,10 +28,14 @@ class BookShopServerApplicationTests {
     private OrderitemVoMapper orderitemVoMapper;
     @Resource
     private OrderMapper orderMapper;
+    @Resource
+    private AuthorMapper authorMapper;
+    @Resource
+    private BookMapper bookMapper;
     @Test
     public void test(){
-        List<OrderVo> orderVos = orderMapper.selectOrderVoByUserIdAndOrderitemState(1, 0);
-        System.out.println(orderVos.size());
+        List<Book> books = bookMapper.selectPopularBooksByAuthorId(18, 4);
+        System.out.println(books);
     }
 
 }

@@ -1,6 +1,9 @@
 package com.ncuedu.bookshopserver.service;
 
 import com.ncuedu.bookshopserver.pojo.Author;
+import com.ncuedu.bookshopserver.pojo.vo.AuthorVo;
+
+import java.util.List;
 
 /**
  * @Desc
@@ -10,4 +13,6 @@ import com.ncuedu.bookshopserver.pojo.Author;
 public interface AuthorService {
 
     Author getAuthorById(Integer id);
+
+    List<AuthorVo> getMostPopularAuthor(Integer size);
 }

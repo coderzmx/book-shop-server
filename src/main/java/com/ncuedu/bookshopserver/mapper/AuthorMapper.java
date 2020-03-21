@@ -2,6 +2,7 @@ package com.ncuedu.bookshopserver.mapper;
 
 import com.ncuedu.bookshopserver.pojo.Author;
 import com.ncuedu.bookshopserver.pojo.AuthorExample;
+import com.ncuedu.bookshopserver.pojo.vo.AuthorVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -28,4 +29,6 @@ public interface AuthorMapper {
     int updateByPrimaryKeySelective(Author record);
 
     int updateByPrimaryKey(Author record);
+
+    List<AuthorVo> selectMostPopularAuthor(@Param("size") Integer size);
 }

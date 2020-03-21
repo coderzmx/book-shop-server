@@ -1,8 +1,11 @@
 package com.ncuedu.bookshopserver.pojo;
 
+import lombok.Data;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
+@Data
 public class Book {
     private Integer bookId;
 
@@ -41,156 +44,4 @@ public class Book {
     private Integer bookFlag;
 
     private String bookRecommend;
-
-    public Integer getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(Integer bookId) {
-        this.bookId = bookId;
-    }
-
-    public String getBookTitle() {
-        return bookTitle;
-    }
-
-    public void setBookTitle(String bookTitle) {
-        this.bookTitle = bookTitle == null ? null : bookTitle.trim();
-    }
-
-    public Integer getBookStock() {
-        return bookStock;
-    }
-
-    public void setBookStock(Integer bookStock) {
-        this.bookStock = bookStock;
-    }
-
-    public BigDecimal getBookOrderprice() {
-        return bookOrderprice;
-    }
-
-    public void setBookOrderprice(BigDecimal bookOrderprice) {
-        this.bookOrderprice = bookOrderprice;
-    }
-
-    public BigDecimal getBookSaleprice() {
-        return bookSaleprice;
-    }
-
-    public void setBookSaleprice(BigDecimal bookSaleprice) {
-        this.bookSaleprice = bookSaleprice;
-    }
-
-    public Integer getBookSalevolume() {
-        return bookSalevolume;
-    }
-
-    public void setBookSalevolume(Integer bookSalevolume) {
-        this.bookSalevolume = bookSalevolume;
-    }
-
-    public Date getBookShelftime() {
-        return bookShelftime;
-    }
-
-    public void setBookShelftime(Date bookShelftime) {
-        this.bookShelftime = bookShelftime;
-    }
-
-    public Date getBookPresstime() {
-        return bookPresstime;
-    }
-
-    public void setBookPresstime(Date bookPresstime) {
-        this.bookPresstime = bookPresstime;
-    }
-
-    public String getBookIsbn() {
-        return bookIsbn;
-    }
-
-    public void setBookIsbn(String bookIsbn) {
-        this.bookIsbn = bookIsbn == null ? null : bookIsbn.trim();
-    }
-
-    public String getBookPress() {
-        return bookPress;
-    }
-
-    public void setBookPress(String bookPress) {
-        this.bookPress = bookPress == null ? null : bookPress.trim();
-    }
-
-    public String getBookDes() {
-        return bookDes;
-    }
-
-    public void setBookDes(String bookDes) {
-        this.bookDes = bookDes == null ? null : bookDes.trim();
-    }
-
-    public Integer getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(Integer authorId) {
-        this.authorId = authorId;
-    }
-
-    public String getBookImg() {
-        return bookImg;
-    }
-
-    public void setBookImg(String bookImg) {
-        this.bookImg = bookImg == null ? null : bookImg.trim();
-    }
-
-    public String getBookImg2() {
-        return bookImg2;
-    }
-
-    public void setBookImg2(String bookImg2) {
-        this.bookImg2 = bookImg2 == null ? null : bookImg2.trim();
-    }
-
-    public String getBookImg3() {
-        return bookImg3;
-    }
-
-    public void setBookImg3(String bookImg3) {
-        this.bookImg3 = bookImg3 == null ? null : bookImg3.trim();
-    }
-
-    public String getBookImg4() {
-        return bookImg4;
-    }
-
-    public void setBookImg4(String bookImg4) {
-        this.bookImg4 = bookImg4 == null ? null : bookImg4.trim();
-    }
-
-    public Integer getCateId() {
-        return cateId;
-    }
-
-    public void setCateId(Integer cateId) {
-        this.cateId = cateId;
-    }
-
-    public Integer getBookFlag() {
-        return bookFlag;
-    }
-
-    public void setBookFlag(Integer bookFlag) {
-        this.bookFlag = bookFlag;
-    }
-
-    public String getBookRecommend() {
-        return bookRecommend;
-    }
-
-    public void setBookRecommend(String bookRecommend) {
-        this.bookRecommend = bookRecommend == null ? null : bookRecommend.trim();
-    }
 }

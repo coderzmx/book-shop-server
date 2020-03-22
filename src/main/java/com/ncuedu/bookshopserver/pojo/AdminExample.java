@@ -1,6 +1,7 @@
 package com.ncuedu.bookshopserver.pojo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class AdminExample {
@@ -301,6 +302,186 @@ public class AdminExample {
 
         public Criteria andAdminPasswordNotBetween(String value1, String value2) {
             addCriterion("admin_password not between", value1, value2, "adminPassword");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminIsSuperIsNull() {
+            addCriterion("admin_is_super is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminIsSuperIsNotNull() {
+            addCriterion("admin_is_super is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminIsSuperEqualTo(Integer value) {
+            addCriterion("admin_is_super =", value, "adminIsSuper");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminIsSuperNotEqualTo(Integer value) {
+            addCriterion("admin_is_super <>", value, "adminIsSuper");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminIsSuperGreaterThan(Integer value) {
+            addCriterion("admin_is_super >", value, "adminIsSuper");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminIsSuperGreaterThanOrEqualTo(Integer value) {
+            addCriterion("admin_is_super >=", value, "adminIsSuper");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminIsSuperLessThan(Integer value) {
+            addCriterion("admin_is_super <", value, "adminIsSuper");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminIsSuperLessThanOrEqualTo(Integer value) {
+            addCriterion("admin_is_super <=", value, "adminIsSuper");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminIsSuperIn(List<Integer> values) {
+            addCriterion("admin_is_super in", values, "adminIsSuper");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminIsSuperNotIn(List<Integer> values) {
+            addCriterion("admin_is_super not in", values, "adminIsSuper");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminIsSuperBetween(Integer value1, Integer value2) {
+            addCriterion("admin_is_super between", value1, value2, "adminIsSuper");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminIsSuperNotBetween(Integer value1, Integer value2) {
+            addCriterion("admin_is_super not between", value1, value2, "adminIsSuper");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminCreateTimeIsNull() {
+            addCriterion("admin_create_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminCreateTimeIsNotNull() {
+            addCriterion("admin_create_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminCreateTimeEqualTo(Date value) {
+            addCriterion("admin_create_time =", value, "adminCreateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminCreateTimeNotEqualTo(Date value) {
+            addCriterion("admin_create_time <>", value, "adminCreateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminCreateTimeGreaterThan(Date value) {
+            addCriterion("admin_create_time >", value, "adminCreateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminCreateTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("admin_create_time >=", value, "adminCreateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminCreateTimeLessThan(Date value) {
+            addCriterion("admin_create_time <", value, "adminCreateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminCreateTimeLessThanOrEqualTo(Date value) {
+            addCriterion("admin_create_time <=", value, "adminCreateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminCreateTimeIn(List<Date> values) {
+            addCriterion("admin_create_time in", values, "adminCreateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminCreateTimeNotIn(List<Date> values) {
+            addCriterion("admin_create_time not in", values, "adminCreateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminCreateTimeBetween(Date value1, Date value2) {
+            addCriterion("admin_create_time between", value1, value2, "adminCreateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminCreateTimeNotBetween(Date value1, Date value2) {
+            addCriterion("admin_create_time not between", value1, value2, "adminCreateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminUpdateTimeIsNull() {
+            addCriterion("admin_update_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminUpdateTimeIsNotNull() {
+            addCriterion("admin_update_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminUpdateTimeEqualTo(Date value) {
+            addCriterion("admin_update_time =", value, "adminUpdateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminUpdateTimeNotEqualTo(Date value) {
+            addCriterion("admin_update_time <>", value, "adminUpdateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminUpdateTimeGreaterThan(Date value) {
+            addCriterion("admin_update_time >", value, "adminUpdateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminUpdateTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("admin_update_time >=", value, "adminUpdateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminUpdateTimeLessThan(Date value) {
+            addCriterion("admin_update_time <", value, "adminUpdateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminUpdateTimeLessThanOrEqualTo(Date value) {
+            addCriterion("admin_update_time <=", value, "adminUpdateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminUpdateTimeIn(List<Date> values) {
+            addCriterion("admin_update_time in", values, "adminUpdateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminUpdateTimeNotIn(List<Date> values) {
+            addCriterion("admin_update_time not in", values, "adminUpdateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminUpdateTimeBetween(Date value1, Date value2) {
+            addCriterion("admin_update_time between", value1, value2, "adminUpdateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminUpdateTimeNotBetween(Date value1, Date value2) {
+            addCriterion("admin_update_time not between", value1, value2, "adminUpdateTime");
             return (Criteria) this;
         }
     }

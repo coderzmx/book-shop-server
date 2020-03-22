@@ -5,6 +5,9 @@
     <id column="admin_id" jdbcType="INTEGER" property="adminId" />
     <result column="admin_name" jdbcType="VARCHAR" property="adminName" />
     <result column="admin_password" jdbcType="VARCHAR" property="adminPassword" />
+    <result column="admin_is_super" jdbcType="INTEGER" property="adminIsSuper" />
+    <result column="admin_create_time" jdbcType="TIMESTAMP" property="adminCreateTime" />
+    <result column="admin_update_time" jdbcType="TIMESTAMP" property="adminUpdateTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    admin_id, admin_name, admin_password
+    admin_id, admin_name, admin_password, admin_is_super, admin_create_time, admin_update_time
   </sql>
   <select id="selectByExample" parameterType="com.ncuedu.bookshopserver.pojo.AdminExample" resultMap="BaseResultMap">
     select
@@ -98,9 +101,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ncuedu.bookshopserver.pojo.Admin">
-    insert into admin (admin_id, admin_name, admin_password
+    insert into admin (admin_id, admin_name, admin_password, 
+      admin_is_super, admin_create_time, admin_update_time
       )
-    values (#{adminId,jdbcType=INTEGER}, #{adminName,jdbcType=VARCHAR}, #{adminPassword,jdbcType=VARCHAR}
+    values (#{adminId,jdbcType=INTEGER}, #{adminName,jdbcType=VARCHAR}, #{adminPassword,jdbcType=VARCHAR}, 
+      #{adminIsSuper,jdbcType=INTEGER}, #{adminCreateTime,jdbcType=TIMESTAMP}, #{adminUpdateTime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ncuedu.bookshopserver.pojo.Admin">
@@ -115,6 +120,15 @@
       <if test="adminPassword != null">
         admin_password,
       </if>
+      <if test="adminIsSuper != null">
+        admin_is_super,
+      </if>
+      <if test="adminCreateTime != null">
+        admin_create_time,
+      </if>
+      <if test="adminUpdateTime != null">
+        admin_update_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="adminId != null">
@@ -125,6 +139,15 @@
       </if>
       <if test="adminPassword != null">
         #{adminPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="adminIsSuper != null">
+        #{adminIsSuper,jdbcType=INTEGER},
+      </if>
+      <if test="adminCreateTime != null">
+        #{adminCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adminUpdateTime != null">
+        #{adminUpdateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -146,6 +169,15 @@
       <if test="record.adminPassword != null">
         admin_password = #{record.adminPassword,jdbcType=VARCHAR},
       </if>
+      <if test="record.adminIsSuper != null">
+        admin_is_super = #{record.adminIsSuper,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminCreateTime != null">
+        admin_create_time = #{record.adminCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.adminUpdateTime != null">
+        admin_update_time = #{record.adminUpdateTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -155,7 +187,10 @@
     update admin
     set admin_id = #{record.adminId,jdbcType=INTEGER},
       admin_name = #{record.adminName,jdbcType=VARCHAR},
-      admin_password = #{record.adminPassword,jdbcType=VARCHAR}
+      admin_password = #{record.adminPassword,jdbcType=VARCHAR},
+      admin_is_super = #{record.adminIsSuper,jdbcType=INTEGER},
+      admin_create_time = #{record.adminCreateTime,jdbcType=TIMESTAMP},
+      admin_update_time = #{record.adminUpdateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -169,13 +204,25 @@
       <if test="adminPassword != null">
         admin_password = #{adminPassword,jdbcType=VARCHAR},
       </if>
+      <if test="adminIsSuper != null">
+        admin_is_super = #{adminIsSuper,jdbcType=INTEGER},
+      </if>
+      <if test="adminCreateTime != null">
+        admin_create_time = #{adminCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adminUpdateTime != null">
+        admin_update_time = #{adminUpdateTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where admin_id = #{adminId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ncuedu.bookshopserver.pojo.Admin">
     update admin
     set admin_name = #{adminName,jdbcType=VARCHAR},
-      admin_password = #{adminPassword,jdbcType=VARCHAR}
+      admin_password = #{adminPassword,jdbcType=VARCHAR},
+      admin_is_super = #{adminIsSuper,jdbcType=INTEGER},
+      admin_create_time = #{adminCreateTime,jdbcType=TIMESTAMP},
+      admin_update_time = #{adminUpdateTime,jdbcType=TIMESTAMP}
     where admin_id = #{adminId,jdbcType=INTEGER}
   </update>
 </mapper>

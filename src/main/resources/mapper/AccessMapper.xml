@@ -208,4 +208,9 @@
       access_update_time = #{accessUpdateTime,jdbcType=TIMESTAMP}
     where access_id = #{accessId,jdbcType=INTEGER}
   </update>
+
+  <select id="selectAccessByRoleId" resultMap="BaseResultMap">
+    select access.* from access left join role_access on access.access_id=role_access.access_id
+    left join role on role_access.role_id=role.role_id WHERE role.role_id=#{id}
+  </select>
 </mapper>

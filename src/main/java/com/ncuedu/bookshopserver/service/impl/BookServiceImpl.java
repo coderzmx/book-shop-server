@@ -94,4 +94,5 @@ public class BookServiceImpl implements BookService {
         List<BookVo> books=new PageInfo<BookVo>(bookVoMapper.selectAllByCondition(2)).getList();
         return books;
     }
+
 }

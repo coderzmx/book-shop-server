@@ -15,27 +15,11 @@ import java.util.List;
 @SpringBootTest
 class BookShopServerApplicationTests {
     @Resource
-    private BookVoMapper bookVoMapper;
-    @Resource
-    private BookRankVoMapper bookRankVoMapper;
-    @Resource
-    private CommentVoMapper commentVoMapper;
-    @Resource
-    private CartVoMapper cartVoMapper;
-    @Resource
-    private CartMapper cartMapper;
-    @Resource
-    private OrderitemVoMapper orderitemVoMapper;
-    @Resource
-    private OrderMapper orderMapper;
-    @Resource
-    private AuthorMapper authorMapper;
-    @Resource
-    private BookMapper bookMapper;
+    private AdminVoMapper adminVoMapper;
     @Test
     public void test(){
-        List<Book> books = bookMapper.selectPopularBooksByAuthorId(18, 4);
-        System.out.println(books);
+        AdminVo adminVo = adminVoMapper.selectAdminVoById(2);
+        System.out.println(adminVo);
     }
 
 }

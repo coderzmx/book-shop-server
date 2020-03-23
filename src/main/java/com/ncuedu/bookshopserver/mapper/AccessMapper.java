@@ -28,4 +28,6 @@ public interface AccessMapper {
     int updateByPrimaryKeySelective(Access record);
 
     int updateByPrimaryKey(Access record);
+
+    List<Access> selectAccessByRoleId(@Param("id") Integer id);
 }

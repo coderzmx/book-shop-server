@@ -3,6 +3,7 @@ package com.ncuedu.bookshopserver.service.impl;
 import com.ncuedu.bookshopserver.mapper.UserMapper;
 import com.ncuedu.bookshopserver.pojo.User;
 import com.ncuedu.bookshopserver.pojo.UserExample;
+import com.ncuedu.bookshopserver.pojo.vo.UserVo;
 import com.ncuedu.bookshopserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,10 +23,18 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public User getUserByNameAndPassword(User user) {
+    public User getUserByNameAndPassword(UserVo user) {
         UserExample userExample = new UserExample();
         UserExample.Criteria criteria = userExample.createCriteria();
         criteria.andUserNameEqualTo(user.getUserName()).andUserPasswordEqualTo(user.getUserPassword());
+        List<User> users = userMapper.selectByExample(userExample);
+        return users.size()>0?users.get(0):null;
+    }
+
+    @Override
+    public User getUserByTel(String tel) {
+        UserExample userExample = new UserExample();
+        userExample.or().andUserTelEqualTo(tel);
         List<User> users = userMapper.selectByExample(userExample);
         return users.size()>0?users.get(0):null;
     }

@@ -1,14 +1,16 @@
 package com.ncuedu.bookshopserver.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.ncuedu.bookshopserver.pojo.Book;
 import com.ncuedu.bookshopserver.pojo.vo.BookRankVo;
 import com.ncuedu.bookshopserver.pojo.vo.BookVo;
 import com.ncuedu.bookshopserver.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Desc
@@ -59,5 +61,31 @@ public class BookController {
     @GetMapping("/book/mostVolume")
     public List<BookVo> getMostVolumeBook(){
         return bookService.getMostVolumeBooks();
+    }
+
+    @GetMapping("/admin/books")
+    public PageInfo<BookVo> getBooks(Integer page,String title,String author,String stock,String saleVolume,String flag, Integer size){
+        Map<String,Object> filter=new HashMap<>();
+        filter.put("title",title);
+        filter.put("author",author);
+        filter.put("stock",stock);
+        filter.put("saleVolume",saleVolume);
+        filter.put("flag",flag);
+        return bookService.getBooksByCondition(page,size,filter);
+    }
+
+    @PutMapping("/admin/book")
+    public Integer updateBook(@RequestBody Book book){
+        return bookService.updateBook(book);
+    }
+
+    @PostMapping("/admin/book")
+    public Integer addBook(@RequestBody Book book){
+        return bookService.addBook(book);
+    }
+
+    @DeleteMapping("/admin/book/{id}")
+    public Integer deleteBook(@PathVariable("id") Integer id){
+        return bookService.deleteBook(id);
     }
 }

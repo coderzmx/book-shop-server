@@ -1,6 +1,7 @@
 package com.ncuedu.bookshopserver.service;
 
 import com.ncuedu.bookshopserver.pojo.User;
+import com.ncuedu.bookshopserver.pojo.vo.UserVo;
 
 import java.util.List;
 
@@ -11,7 +12,9 @@ import java.util.List;
  **/
 public interface UserService {
 
-    User getUserByNameAndPassword(User user);
+    User getUserByNameAndPassword(UserVo user);
+
+    User getUserByTel(String tel);
 
     boolean checkUserName(String userName);
 

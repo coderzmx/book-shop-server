@@ -1,5 +1,6 @@
 package com.ncuedu.bookshopserver.service;
 
+import com.alibaba.fastjson.support.odps.udf.CodecCheck;
 import com.ncuedu.bookshopserver.pojo.Author;
 import com.ncuedu.bookshopserver.pojo.vo.AuthorVo;
 
@@ -15,4 +16,6 @@ public interface AuthorService {
     Author getAuthorById(Integer id);
 
     List<AuthorVo> getMostPopularAuthor(Integer size);
+
+    List<Author> getAuthors();
 }

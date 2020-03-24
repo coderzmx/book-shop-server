@@ -3,14 +3,8 @@ package com.ncuedu.bookshopserver.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.ncuedu.bookshopserver.mapper.CartMapper;
-import com.ncuedu.bookshopserver.mapper.OrderMapper;
-import com.ncuedu.bookshopserver.mapper.OrderitemMapper;
-import com.ncuedu.bookshopserver.mapper.OrderitemVoMapper;
-import com.ncuedu.bookshopserver.pojo.Cart;
-import com.ncuedu.bookshopserver.pojo.Order;
-import com.ncuedu.bookshopserver.pojo.OrderExample;
-import com.ncuedu.bookshopserver.pojo.Orderitem;
+import com.ncuedu.bookshopserver.mapper.*;
+import com.ncuedu.bookshopserver.pojo.*;
 import com.ncuedu.bookshopserver.pojo.vo.OrderVo;
 import com.ncuedu.bookshopserver.pojo.vo.OrderitemVo;
 import com.ncuedu.bookshopserver.service.OrderService;
@@ -38,6 +32,8 @@ public class OrderServiceImpl implements OrderService {
     private OrderitemMapper orderitemMapper;
     @Resource
     private OrderitemVoMapper orderitemVoMapper;
+    @Resource
+    private BookMapper bookMapper;
     @Override
     public Integer addOrder(List<Orderitem> orderitems,Integer userId,Integer addressId,List<Integer> cartIds) {
         Order order = new Order();
@@ -49,6 +45,9 @@ public class OrderServiceImpl implements OrderService {
         for (int i = 0; i < orderitems.size(); i++) {
             Orderitem orderitem = JSON.parseObject(JSON.toJSONString(orderitems.get(i)),Orderitem.class);
             orderitem.setOrderId(order.getOrderId());
+            Book book = bookMapper.selectByPrimaryKey(orderitem.getBookId());
+            book.setBookStock(book.getBookStock()-orderitem.getOrderitemAmount());
+            bookMapper.updateByPrimaryKeySelective(book);
             orderitemMapper.insertSelective(orderitem);
         }
         cartMapper.deleteByIds(cartIds);

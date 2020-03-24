@@ -29,4 +29,9 @@ public class AuthorController {
     public List<AuthorVo> getMostPopularAuthor(){
         return authorService.getMostPopularAuthor(4);
     }
+
+    @GetMapping("/authors")
+    public List<Author> getAuthors(){
+        return authorService.getAuthors();
+    }
 }

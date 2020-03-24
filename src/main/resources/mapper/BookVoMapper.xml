@@ -22,11 +22,12 @@
     <result column="book_flag" jdbcType="INTEGER" property="bookFlag" />
     <result column="book_recommend" jdbcType="VARCHAR" property="bookRecommend" />
     <result column="author_name" jdbcType="VARCHAR" property="authorName" />
+    <result column="cate_name" jdbcType="VARCHAR" property="cateName" />
   </resultMap>
   <sql id="Base_Column_List">
     book_id, book_title, book_stock, book_orderprice, book_saleprice, book_salevolume, 
     book_shelftime, book_presstime, book_isbn, book_press, book_des, book.author_id, book_img,
-    book_img2, book_img3,book_img4, cate_id, book_flag, book_recommend,author_name
+    book_img2, book_img3,book_img4, book.cate_id, book_flag, book_recommend,author_name
   </sql>
 
   <sql id="filterCondition">
@@ -84,5 +85,40 @@
     from book left join author
     on book.author_id=author.author_id
     WHERE cate_id=#{cateId} and book_id!=#{bookId} ORDER BY book_salevolume desc LIMIT 0,4;
+  </select>
+
+  <select id="selectBooksByCondition" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,cate_name
+    from book left join author
+    on book.author_id=author.author_id
+    left join cate on book.cate_id=cate.cate_id
+    <if test="(stock!='undefined' and stock!='')or(saleVolume!='undefined' and saleVolume!='')">
+      order by
+      <if test="stock!='undefined' and stock!=''">
+        book_stock ${stock}
+      </if>
+      <if test="saleVolume!='undefined' and saleVolume!=''">
+        <choose>
+          <when test="(saleVolume!='undefined' and saleVolume!='') and (stock=='undefined' or stock=='')">
+            book_salevolume ${saleVolume}
+          </when>
+          <otherwise>
+            ,book_salevolume ${saleVolume}
+          </otherwise>
+        </choose>
+      </if>
+    </if>
+    <where>
+      <if test="title!='undefined' and title!=''">
+        book_title like '%${title}%'
+      </if>
+      <if test="author!='undefined' and author!=''">
+        and author_name=#{author}
+      </if>
+      <if test="flag!='undefined' and flag!=''">
+        and book_flag=#{flag}
+      </if>
+    </where>
   </select>
 </mapper>

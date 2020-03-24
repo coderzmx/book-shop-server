@@ -16,4 +16,6 @@ public interface CateService {
     List<Cate> getAllFirstCates();
 
     Cate getFirstCateBySecondCateId(Integer id);
+
+    List<Cate>  getAllSecondCates();
 }

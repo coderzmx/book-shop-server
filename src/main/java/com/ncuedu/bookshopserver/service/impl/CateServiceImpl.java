@@ -44,4 +44,11 @@ public class CateServiceImpl implements CateService {
         Cate firstCate = cateMapper.selectByPrimaryKey(secondCate.getParentId());
         return firstCate;
     }
+
+    @Override
+    public List<Cate> getAllSecondCates() {
+        CateExample cateExample = new CateExample();
+        cateExample.or().andParentIdNotEqualTo(0);
+        return cateMapper.selectByExample(cateExample);
+    }
 }

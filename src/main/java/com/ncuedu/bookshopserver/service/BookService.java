@@ -1,10 +1,12 @@
 package com.ncuedu.bookshopserver.service;
 
 import com.github.pagehelper.PageInfo;
+import com.ncuedu.bookshopserver.pojo.Book;
 import com.ncuedu.bookshopserver.pojo.vo.BookRankVo;
 import com.ncuedu.bookshopserver.pojo.vo.BookVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Desc
@@ -28,4 +30,12 @@ public interface BookService {
     List<BookVo> getLatestBook();
 
     List<BookVo> getMostVolumeBooks();
+
+    PageInfo<BookVo> getBooksByCondition(Integer page, Integer size, Map<String,Object> map);
+
+    Integer updateBook(Book book);
+
+    Integer addBook(Book book);
+
+    Integer deleteBook(Integer id);
 }

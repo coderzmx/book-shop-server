@@ -27,16 +27,30 @@ public class UserController {
     private RedisUtil redisUtil;
 
     @PostMapping("/user/login")
-    public Map<String,Object> login(@RequestBody User user){
+    public Map<String,Object> login(@RequestBody UserVo user){
         User userDetail = userService.getUserByNameAndPassword(user);
+        return saveUserInfo(userDetail);
+    }
+
+    @PostMapping("/user/loginTel")
+    public Map<String,Object> loginTel(@RequestBody UserVo user){
+        String code = (String) redisUtil.get(user.getUserTel());
+        User userDetail=null;
+        if(code!=null&&code.equals(user.getCode())){
+            userDetail = userService.getUserByTel(user.getUserTel());
+        }
+        return saveUserInfo(userDetail);
+    }
+
+    private Map<String,Object> saveUserInfo(User user){
         Map<String,Object> result=new HashMap<>();
         result.put("code",0);
-        if(userDetail!=null){
+        if(user!=null){
             String key= UUID.randomUUID().toString();
-            redisUtil.set(key,userDetail);
+            redisUtil.set(key,user);
             result.put("code",200);
             result.put("token",key);
-            result.put("userInfo",userDetail);
+            result.put("userInfo",user);
         }
         return result;
     }

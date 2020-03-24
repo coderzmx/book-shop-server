@@ -39,4 +39,9 @@ public class AuthorServiceImpl implements AuthorService {
         }
         return authorVos;
     }
+
+    @Override
+    public List<Author> getAuthors() {
+        return authorMapper.selectByExample(null);
+    }
 }

@@ -6,6 +6,7 @@ import com.ncuedu.bookshopserver.mapper.BookMapper;
 import com.ncuedu.bookshopserver.mapper.BookRankVoMapper;
 import com.ncuedu.bookshopserver.mapper.BookVoMapper;
 import com.ncuedu.bookshopserver.mapper.CateMapper;
+import com.ncuedu.bookshopserver.pojo.Book;
 import com.ncuedu.bookshopserver.pojo.Cate;
 import com.ncuedu.bookshopserver.pojo.CateExample;
 import com.ncuedu.bookshopserver.pojo.vo.BookRankVo;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Desc
@@ -93,6 +95,30 @@ public class BookServiceImpl implements BookService {
         PageHelper.startPage(1,12);
         List<BookVo> books=new PageInfo<BookVo>(bookVoMapper.selectAllByCondition(2)).getList();
         return books;
+    }
+
+    @Override
+    public PageInfo<BookVo> getBooksByCondition(Integer page, Integer size, Map<String,Object> map) {
+        if(size==null) size=10;
+        if(page==null) page=1;
+        PageHelper.startPage(page,size);
+        PageInfo<BookVo> books=new PageInfo<>(bookVoMapper.selectBooksByCondition(map));
+        return books;
+    }
+
+    @Override
+    public Integer updateBook(Book book) {
+        return bookMapper.updateByPrimaryKeySelective(book);
+    }
+
+    @Override
+    public Integer addBook(Book book) {
+        return bookMapper.insertSelective(book);
+    }
+
+    @Override
+    public Integer deleteBook(Integer id) {
+        return bookMapper.deleteByPrimaryKey(id);
     }
 
 }

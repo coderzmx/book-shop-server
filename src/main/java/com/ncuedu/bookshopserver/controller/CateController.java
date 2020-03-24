@@ -33,4 +33,9 @@ public class CateController {
     public Cate getFirstBySecondId(Integer id){
         return cateService.getFirstCateBySecondCateId(id);
     }
+
+    @GetMapping("/cate/secondCates")
+    public List<Cate> getAllSecondCates(){
+        return cateService.getAllSecondCates();
+    }
 }

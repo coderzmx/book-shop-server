@@ -4,6 +4,7 @@ import com.ncuedu.bookshopserver.pojo.vo.BookVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Desc
@@ -21,4 +22,6 @@ public interface BookVoMapper {
     BookVo selectBookById(Integer id);
 
     List<BookVo> selectOtherTopRankBookByCateId(@Param("cateId") Integer cateId,@Param("bookId") Integer bookId);
+
+    List<BookVo> selectBooksByCondition(Map<String,Object> map);
 }

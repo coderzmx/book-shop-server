@@ -110,7 +110,7 @@
     values (#{authorId,jdbcType=INTEGER}, #{authorName,jdbcType=VARCHAR}, #{authorImg,jdbcType=VARCHAR}, 
       #{authorDes,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ncuedu.bookshopserver.pojo.Author">
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="authorId" parameterType="com.ncuedu.bookshopserver.pojo.Author">
     insert into author
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="authorId != null">

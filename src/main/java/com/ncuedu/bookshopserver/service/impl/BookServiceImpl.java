@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -113,6 +114,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Integer addBook(Book book) {
+        book.setBookSalevolume(0);
+        book.setBookShelftime(new Date());
         return bookMapper.insertSelective(book);
     }
 

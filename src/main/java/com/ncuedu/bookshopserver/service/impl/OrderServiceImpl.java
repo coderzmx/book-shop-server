@@ -47,6 +47,7 @@ public class OrderServiceImpl implements OrderService {
             orderitem.setOrderId(order.getOrderId());
             Book book = bookMapper.selectByPrimaryKey(orderitem.getBookId());
             book.setBookStock(book.getBookStock()-orderitem.getOrderitemAmount());
+            book.setBookSalevolume(book.getBookSalevolume()+orderitem.getOrderitemAmount());
             bookMapper.updateByPrimaryKeySelective(book);
             orderitemMapper.insertSelective(orderitem);
         }

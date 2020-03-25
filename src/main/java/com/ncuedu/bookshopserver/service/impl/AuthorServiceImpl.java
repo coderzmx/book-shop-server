@@ -1,8 +1,11 @@
 package com.ncuedu.bookshopserver.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.ncuedu.bookshopserver.mapper.AuthorMapper;
 import com.ncuedu.bookshopserver.mapper.BookMapper;
 import com.ncuedu.bookshopserver.pojo.Author;
+import com.ncuedu.bookshopserver.pojo.AuthorExample;
 import com.ncuedu.bookshopserver.pojo.Book;
 import com.ncuedu.bookshopserver.pojo.vo.AuthorVo;
 import com.ncuedu.bookshopserver.service.AuthorService;
@@ -43,5 +46,32 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public List<Author> getAuthors() {
         return authorMapper.selectByExample(null);
+    }
+
+    @Override
+    public PageInfo<Author> getAuthorsByPage(Integer page,String authorName) {
+        if(page==null) page=1;
+        if(authorName==null) authorName="";
+        PageHelper.startPage(page,10);
+        AuthorExample authorExample = new AuthorExample();
+        authorExample.or().andAuthorNameLike("%"+authorName+"%");
+        PageInfo<Author> authors=new PageInfo<>(authorMapper.selectByExample(authorExample));
+        return authors;
+    }
+
+    @Override
+    public Integer addAuthor(Author author) {
+        authorMapper.insertSelective(author);
+        return author.getAuthorId();
+    }
+
+    @Override
+    public Integer updateAuthor(Author author) {
+        return authorMapper.updateByPrimaryKeySelective(author);
+    }
+
+    @Override
+    public Integer deleteAuthor(Integer id) {
+        return authorMapper.deleteByPrimaryKey(id);
     }
 }

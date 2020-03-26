@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncuedu.bookshopserver.mapper.AdminOrderitemMapper">
+  <resultMap id="BaseResultMap" type="com.ncuedu.bookshopserver.pojo.vo.AdminOrderItemVo">
+    <id column="orderItem_id" jdbcType="INTEGER" property="orderitemId" />
+    <result column="book_id" jdbcType="INTEGER" property="bookId" />
+    <result column="orderItem_amount" jdbcType="INTEGER" property="orderitemAmount" />
+    <result column="orderItem_price" jdbcType="DECIMAL" property="orderitemPrice" />
+    <result column="orderItem_state" jdbcType="INTEGER" property="orderitemState" />
+    <result column="orderItem_remark" jdbcType="VARCHAR" property="orderitemRemark" />
+    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="orderItem_remark" jdbcType="VARCHAR" property="orderitemRemark" />
+    <result column="order_time" jdbcType="TIMESTAMP" property="orderTime" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="address_id" jdbcType="INTEGER" property="address.addressId" />
+    <result column="user_id" jdbcType="INTEGER" property="address.userId" />
+    <result column="address_province" jdbcType="VARCHAR" property="address.addressProvince" />
+    <result column="address_city" jdbcType="VARCHAR" property="address.addressCity" />
+    <result column="address_county" jdbcType="VARCHAR" property="address.addressCounty" />
+    <result column="address_street" jdbcType="VARCHAR" property="address.addressStreet" />
+    <result column="address_detailed" jdbcType="VARCHAR" property="address.addressDetailed" />
+    <result column="address_code" jdbcType="VARCHAR" property="address.addressCode" />
+    <result column="address_name" jdbcType="VARCHAR" property="address.addressName" />
+    <result column="address_tel" jdbcType="VARCHAR" property="address.addressTel" />
+    <result column="address_flag" jdbcType="INTEGER" property="address.addressFlag" />
+    <result column="book_title" jdbcType="VARCHAR" property="bookTitle" />
+  </resultMap>
+
+  <select id="selectOrders" resultMap="BaseResultMap">
+    SELECT oi.*,o.order_time,user.user_name,address.*,book.book_title FROM `orderitem` oi
+    left join `order` o on oi.order_id=o.order_id
+    left join `user` on o.user_id=user.user_id
+    left join address on o.address_id=address.address_id
+    left join book on oi.book_id=book.book_id
+    <where>
+      <if test="userName!='undefined' and userName!=null">
+        user_name like '%${userName}%'
+      </if>
+      <if test="bookTitle!='undefined' and bookTitle!=null">
+        and book_title like '%${bookTitle}%'
+      </if>
+      <if test="orderitemState!='undefined' and orderitemState!='' and orderitemState!=null ">
+        and orderItem_state =#{orderitemState}
+      </if>
+    </where>
+  </select>
+</mapper>

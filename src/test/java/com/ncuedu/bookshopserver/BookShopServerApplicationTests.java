@@ -18,6 +18,8 @@ class BookShopServerApplicationTests {
     private AdminVoMapper adminVoMapper;
     @Resource
     private CateVoMapper cateVoMapper;
+    @Resource
+    private AdminOrderitemMapper adminOrderitemMapper;
     @Test
     public void test(){
 

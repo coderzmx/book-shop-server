@@ -1,6 +1,10 @@
 package com.ncuedu.bookshopserver.service;
 
+import com.github.pagehelper.PageInfo;
 import com.ncuedu.bookshopserver.pojo.Orderitem;
+import com.ncuedu.bookshopserver.pojo.vo.AdminOrderItemVo;
+
+import java.util.List;
 
 /**
  * @Desc
@@ -9,4 +13,6 @@ import com.ncuedu.bookshopserver.pojo.Orderitem;
  **/
 public interface OrderitemService {
     Integer updateOrderitem(Orderitem orderitem);
+
+    PageInfo<AdminOrderItemVo> getOrders(Integer page,String userName,String bookTitle,String orderitemState);
 }

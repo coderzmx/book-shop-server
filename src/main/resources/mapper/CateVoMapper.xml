@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncuedu.bookshopserver.mapper.CateVoMapper">
+  <resultMap id="BaseResultMap" type="com.ncuedu.bookshopserver.pojo.vo.CateVo">
+    <id column="cate_id" jdbcType="INTEGER" property="cateId" />
+    <result column="cate_name" jdbcType="VARCHAR" property="cateName" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="parent_name" jdbcType="VARCHAR" property="parentName" />
+  </resultMap>
+
+  <select id="selectAllCates" resultMap="BaseResultMap">
+    SELECT a.*,b.cate_name parent_name FROM `cate` a left join cate b on a.parent_id=b.cate_id
+    <where>
+      <if test="cateName!='undefined'">
+        a.cate_name like '%${cateName}%'
+      </if>
+      <if test="parentId!='undefined' and parentId!=''">
+        and a.parent_id=#{parentId}
+      </if>
+    </where>
+  </select>
+</mapper>

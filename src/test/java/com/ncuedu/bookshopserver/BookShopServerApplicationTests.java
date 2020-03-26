@@ -16,10 +16,11 @@ import java.util.List;
 class BookShopServerApplicationTests {
     @Resource
     private AdminVoMapper adminVoMapper;
+    @Resource
+    private CateVoMapper cateVoMapper;
     @Test
     public void test(){
-        AdminVo adminVo = adminVoMapper.selectAdminVoById(2);
-        System.out.println(adminVo);
+
     }
 
 }

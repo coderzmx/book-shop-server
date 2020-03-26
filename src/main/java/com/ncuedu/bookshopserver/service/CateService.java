@@ -1,6 +1,8 @@
 package com.ncuedu.bookshopserver.service;
 
+import com.github.pagehelper.PageInfo;
 import com.ncuedu.bookshopserver.pojo.Cate;
+import com.ncuedu.bookshopserver.pojo.vo.CateVo;
 
 import java.util.List;
 
@@ -18,4 +20,12 @@ public interface CateService {
     Cate getFirstCateBySecondCateId(Integer id);
 
     List<Cate>  getAllSecondCates();
+
+    PageInfo<CateVo> getAllCates(Integer page,String cateName,String parentId);
+
+    Integer updateCate(Cate cate);
+
+    Integer addCate(Cate cate);
+
+    Integer deleteCate(Integer cateId);
 }

@@ -1,5 +1,8 @@
 package com.ncuedu.bookshopserver.pojo;
 
+import lombok.Data;
+
+@Data
 public class AdminRole {
     private Integer adminRoleId;
 
@@ -7,27 +10,12 @@ public class AdminRole {
 
     private Integer roleId;
 
-    public Integer getAdminRoleId() {
-        return adminRoleId;
-    }
-
-    public void setAdminRoleId(Integer adminRoleId) {
-        this.adminRoleId = adminRoleId;
-    }
-
-    public Integer getAdminId() {
-        return adminId;
-    }
-
-    public void setAdminId(Integer adminId) {
+    public AdminRole(Integer adminId, Integer roleId) {
         this.adminId = adminId;
-    }
-
-    public Integer getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
+    }
+
+    public AdminRole(){
+
     }
 }

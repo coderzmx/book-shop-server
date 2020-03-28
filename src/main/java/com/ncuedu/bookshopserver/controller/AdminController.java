@@ -1,5 +1,6 @@
 package com.ncuedu.bookshopserver.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.ncuedu.bookshopserver.pojo.Admin;
 import com.ncuedu.bookshopserver.pojo.vo.AdminVo;
 import com.ncuedu.bookshopserver.service.AdminService;
@@ -35,5 +36,25 @@ public class AdminController {
     public AdminVo getAdminById(@PathVariable("token") String token){
         Integer id = (Integer) redisUtil.get(token);
         return adminService.getAdminInfo(id);
+    }
+
+    @GetMapping("/admins")
+    public PageInfo<AdminVo> getAdmins(Integer page,String adminName){
+        return adminService.getAdmins(page,adminName);
+    }
+
+    @PutMapping("/admin")
+    public Integer updateAdmin(@RequestBody AdminVo adminVo){
+        return adminService.updateAdmin(adminVo);
+    }
+
+    @PostMapping("/admin")
+    public Integer addAdmin(@RequestBody AdminVo adminVo){
+        return adminService.addAdmin(adminVo);
+    }
+
+    @DeleteMapping("/admin/{id}")
+    public Integer deleteAdmin(@PathVariable("id") Integer id){
+        return adminService.deleteAdmin(id);
     }
 }

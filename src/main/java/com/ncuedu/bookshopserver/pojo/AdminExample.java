@@ -305,6 +305,146 @@ public class AdminExample {
             return (Criteria) this;
         }
 
+        public Criteria andAdminTelIsNull() {
+            addCriterion("admin_tel is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminTelIsNotNull() {
+            addCriterion("admin_tel is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminTelEqualTo(String value) {
+            addCriterion("admin_tel =", value, "adminTel");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminTelNotEqualTo(String value) {
+            addCriterion("admin_tel <>", value, "adminTel");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminTelGreaterThan(String value) {
+            addCriterion("admin_tel >", value, "adminTel");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminTelGreaterThanOrEqualTo(String value) {
+            addCriterion("admin_tel >=", value, "adminTel");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminTelLessThan(String value) {
+            addCriterion("admin_tel <", value, "adminTel");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminTelLessThanOrEqualTo(String value) {
+            addCriterion("admin_tel <=", value, "adminTel");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminTelLike(String value) {
+            addCriterion("admin_tel like", value, "adminTel");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminTelNotLike(String value) {
+            addCriterion("admin_tel not like", value, "adminTel");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminTelIn(List<String> values) {
+            addCriterion("admin_tel in", values, "adminTel");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminTelNotIn(List<String> values) {
+            addCriterion("admin_tel not in", values, "adminTel");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminTelBetween(String value1, String value2) {
+            addCriterion("admin_tel between", value1, value2, "adminTel");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminTelNotBetween(String value1, String value2) {
+            addCriterion("admin_tel not between", value1, value2, "adminTel");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminEmailIsNull() {
+            addCriterion("admin_email is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminEmailIsNotNull() {
+            addCriterion("admin_email is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminEmailEqualTo(String value) {
+            addCriterion("admin_email =", value, "adminEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminEmailNotEqualTo(String value) {
+            addCriterion("admin_email <>", value, "adminEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminEmailGreaterThan(String value) {
+            addCriterion("admin_email >", value, "adminEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminEmailGreaterThanOrEqualTo(String value) {
+            addCriterion("admin_email >=", value, "adminEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminEmailLessThan(String value) {
+            addCriterion("admin_email <", value, "adminEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminEmailLessThanOrEqualTo(String value) {
+            addCriterion("admin_email <=", value, "adminEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminEmailLike(String value) {
+            addCriterion("admin_email like", value, "adminEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminEmailNotLike(String value) {
+            addCriterion("admin_email not like", value, "adminEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminEmailIn(List<String> values) {
+            addCriterion("admin_email in", values, "adminEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminEmailNotIn(List<String> values) {
+            addCriterion("admin_email not in", values, "adminEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminEmailBetween(String value1, String value2) {
+            addCriterion("admin_email between", value1, value2, "adminEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminEmailNotBetween(String value1, String value2) {
+            addCriterion("admin_email not between", value1, value2, "adminEmail");
+            return (Criteria) this;
+        }
+
         public Criteria andAdminIsSuperIsNull() {
             addCriterion("admin_is_super is null");
             return (Criteria) this;

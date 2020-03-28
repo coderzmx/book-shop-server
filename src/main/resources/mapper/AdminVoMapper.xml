@@ -14,4 +14,8 @@
   <select id="selectAdminVoById" resultMap="BaseResultMap">
     select * from admin where admin_id=#{id}
   </select>
+
+  <select id="selectAdmins" resultMap="BaseResultMap">
+    select * from admin where admin_name like '%${adminName}%'
+  </select>
 </mapper>

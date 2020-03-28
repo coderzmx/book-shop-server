@@ -5,6 +5,8 @@
     <id column="admin_id" jdbcType="INTEGER" property="adminId" />
     <result column="admin_name" jdbcType="VARCHAR" property="adminName" />
     <result column="admin_password" jdbcType="VARCHAR" property="adminPassword" />
+    <result column="admin_tel" jdbcType="VARCHAR" property="adminTel" />
+    <result column="admin_email" jdbcType="VARCHAR" property="adminEmail" />
     <result column="admin_is_super" jdbcType="INTEGER" property="adminIsSuper" />
     <result column="admin_create_time" jdbcType="TIMESTAMP" property="adminCreateTime" />
     <result column="admin_update_time" jdbcType="TIMESTAMP" property="adminUpdateTime" />
@@ -68,7 +70,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    admin_id, admin_name, admin_password, admin_is_super, admin_create_time, admin_update_time
+    admin_id, admin_name, admin_password, admin_tel, admin_email, admin_is_super, admin_create_time, 
+    admin_update_time
   </sql>
   <select id="selectByExample" parameterType="com.ncuedu.bookshopserver.pojo.AdminExample" resultMap="BaseResultMap">
     select
@@ -102,13 +105,13 @@
   </delete>
   <insert id="insert" parameterType="com.ncuedu.bookshopserver.pojo.Admin">
     insert into admin (admin_id, admin_name, admin_password, 
-      admin_is_super, admin_create_time, admin_update_time
-      )
+      admin_tel, admin_email, admin_is_super, 
+      admin_create_time, admin_update_time)
     values (#{adminId,jdbcType=INTEGER}, #{adminName,jdbcType=VARCHAR}, #{adminPassword,jdbcType=VARCHAR}, 
-      #{adminIsSuper,jdbcType=INTEGER}, #{adminCreateTime,jdbcType=TIMESTAMP}, #{adminUpdateTime,jdbcType=TIMESTAMP}
-      )
+      #{adminTel,jdbcType=VARCHAR}, #{adminEmail,jdbcType=VARCHAR}, #{adminIsSuper,jdbcType=INTEGER}, 
+      #{adminCreateTime,jdbcType=TIMESTAMP}, #{adminUpdateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.ncuedu.bookshopserver.pojo.Admin">
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="adminId" parameterType="com.ncuedu.bookshopserver.pojo.Admin">
     insert into admin
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="adminId != null">
@@ -119,6 +122,12 @@
       </if>
       <if test="adminPassword != null">
         admin_password,
+      </if>
+      <if test="adminTel != null">
+        admin_tel,
+      </if>
+      <if test="adminEmail != null">
+        admin_email,
       </if>
       <if test="adminIsSuper != null">
         admin_is_super,
@@ -139,6 +148,12 @@
       </if>
       <if test="adminPassword != null">
         #{adminPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="adminTel != null">
+        #{adminTel,jdbcType=VARCHAR},
+      </if>
+      <if test="adminEmail != null">
+        #{adminEmail,jdbcType=VARCHAR},
       </if>
       <if test="adminIsSuper != null">
         #{adminIsSuper,jdbcType=INTEGER},
@@ -169,6 +184,12 @@
       <if test="record.adminPassword != null">
         admin_password = #{record.adminPassword,jdbcType=VARCHAR},
       </if>
+      <if test="record.adminTel != null">
+        admin_tel = #{record.adminTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminEmail != null">
+        admin_email = #{record.adminEmail,jdbcType=VARCHAR},
+      </if>
       <if test="record.adminIsSuper != null">
         admin_is_super = #{record.adminIsSuper,jdbcType=INTEGER},
       </if>
@@ -188,6 +209,8 @@
     set admin_id = #{record.adminId,jdbcType=INTEGER},
       admin_name = #{record.adminName,jdbcType=VARCHAR},
       admin_password = #{record.adminPassword,jdbcType=VARCHAR},
+      admin_tel = #{record.adminTel,jdbcType=VARCHAR},
+      admin_email = #{record.adminEmail,jdbcType=VARCHAR},
       admin_is_super = #{record.adminIsSuper,jdbcType=INTEGER},
       admin_create_time = #{record.adminCreateTime,jdbcType=TIMESTAMP},
       admin_update_time = #{record.adminUpdateTime,jdbcType=TIMESTAMP}
@@ -203,6 +226,12 @@
       </if>
       <if test="adminPassword != null">
         admin_password = #{adminPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="adminTel != null">
+        admin_tel = #{adminTel,jdbcType=VARCHAR},
+      </if>
+      <if test="adminEmail != null">
+        admin_email = #{adminEmail,jdbcType=VARCHAR},
       </if>
       <if test="adminIsSuper != null">
         admin_is_super = #{adminIsSuper,jdbcType=INTEGER},
@@ -220,6 +249,8 @@
     update admin
     set admin_name = #{adminName,jdbcType=VARCHAR},
       admin_password = #{adminPassword,jdbcType=VARCHAR},
+      admin_tel = #{adminTel,jdbcType=VARCHAR},
+      admin_email = #{adminEmail,jdbcType=VARCHAR},
       admin_is_super = #{adminIsSuper,jdbcType=INTEGER},
       admin_create_time = #{adminCreateTime,jdbcType=TIMESTAMP},
       admin_update_time = #{adminUpdateTime,jdbcType=TIMESTAMP}

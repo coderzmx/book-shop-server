@@ -48,7 +48,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Integer updateRole(RoleVo roleVo) {
-        Role role = new Role(roleVo.getRoleId(), roleVo.getRoleName(), roleVo.getRoleDesc(), roleVo.getRoleCreateTime(), new Date());
+        Role role = new Role(roleVo.getRoleId(), roleVo.getRoleName(), roleVo.getRoleDesc(), roleVo.getRoleCreateTime(), roleVo.getRoleUpdateTime());
         roleMapper.updateByPrimaryKey(role);
         List<AccessVo> accesses = roleVo.getAccesses();
         RoleAccessExample roleAccessExample = new RoleAccessExample();

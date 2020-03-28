@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ncuedu.bookshopserver.mapper.AccessMapper">
-  <resultMap id="BaseResultMap" type="com.ncuedu.bookshopserver.pojo.Access">
+  <resultMap id="BaseResultMap" type="com.ncuedu.bookshopserver.pojo.vo.AccessVo">
     <id column="access_id" jdbcType="INTEGER" property="accessId" />
     <result column="access_title" jdbcType="VARCHAR" property="accessTitle" />
     <result column="access_uri" jdbcType="VARCHAR" property="accessUri" />

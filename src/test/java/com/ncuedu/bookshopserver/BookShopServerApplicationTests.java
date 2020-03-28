@@ -20,9 +20,14 @@ class BookShopServerApplicationTests {
     private CateVoMapper cateVoMapper;
     @Resource
     private AdminOrderitemMapper adminOrderitemMapper;
+    @Resource
+    private RoleVoMapper roleVoMapper;
+    @Resource
+    private AccessMapper accessMapper;
     @Test
-    public void test(){
-
+    void test(){
+        List<AccessVo> accessVos = accessMapper.selectByExample(null);
+        System.out.println(accessVos);
     }
 
 }

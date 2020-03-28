@@ -2,6 +2,7 @@ package com.ncuedu.bookshopserver.mapper;
 
 import com.ncuedu.bookshopserver.pojo.Access;
 import com.ncuedu.bookshopserver.pojo.AccessExample;
+import com.ncuedu.bookshopserver.pojo.vo.AccessVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public interface AccessMapper {
 
     int insertSelective(Access record);
 
-    List<Access> selectByExample(AccessExample example);
+    List<AccessVo> selectByExample(AccessExample example);
 
     Access selectByPrimaryKey(Integer accessId);
 

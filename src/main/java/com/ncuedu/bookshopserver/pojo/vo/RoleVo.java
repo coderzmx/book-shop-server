@@ -13,7 +13,7 @@ import java.util.List;
  **/
 @Data
 public class RoleVo extends Role {
-    private List<Access> accesses;
+    private List<AccessVo> accesses;
 
     @Override
     public String toString() {

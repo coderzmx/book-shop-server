@@ -9,12 +9,22 @@
     <result column="role_update_time" jdbcType="TIMESTAMP" property="roleUpdateTime" />
     <collection property="accesses" ofType="com.ncuedu.bookshopserver.pojo.Access" column="role_id"
       select="com.ncuedu.bookshopserver.mapper.AccessMapper.selectAccessByRoleId"/>
-
+  </resultMap>
+  <resultMap id="roleResultMap" type="com.ncuedu.bookshopserver.pojo.vo.RoleVo">
+    <id column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="role_desc" jdbcType="VARCHAR" property="roleDesc" />
+    <result column="role_create_time" jdbcType="TIMESTAMP" property="roleCreateTime" />
+    <result column="role_update_time" jdbcType="TIMESTAMP" property="roleUpdateTime" />
   </resultMap>
 
   <select id="selectRoleByAdminId" resultMap="BaseResultMap">
     select role.* FROM role left join admin_role on role.role_id=admin_role.role_id
     left join admin on admin.admin_id=admin_role.admin_id
     WHERE admin.admin_id=#{id}
+  </select>
+
+  <select id="selectAllRoles" resultMap="BaseResultMap">
+    select * from role;
   </select>
 </mapper>

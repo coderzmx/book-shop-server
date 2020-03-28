@@ -105,7 +105,7 @@
     values (#{roleId,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{roleDesc,jdbcType=VARCHAR}, 
       #{roleCreateTime,jdbcType=TIMESTAMP}, #{roleUpdateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.ncuedu.bookshopserver.pojo.Role">
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="roleId" parameterType="com.ncuedu.bookshopserver.pojo.Role">
     insert into role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="roleId != null">

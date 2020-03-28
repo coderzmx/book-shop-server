@@ -1,5 +1,10 @@
 package com.ncuedu.bookshopserver.pojo;
 
+import lombok.Data;
+
+import java.util.Objects;
+
+@Data
 public class RoleAccess {
     private Integer roleAccessId;
 
@@ -7,27 +12,22 @@ public class RoleAccess {
 
     private Integer accessId;
 
-    public Integer getRoleAccessId() {
-        return roleAccessId;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RoleAccess that = (RoleAccess) o;
+        return Objects.equals(roleId, that.roleId) &&
+                Objects.equals(accessId, that.accessId);
     }
 
-    public void setRoleAccessId(Integer roleAccessId) {
-        this.roleAccessId = roleAccessId;
+    @Override
+    public int hashCode() {
+        return Objects.hash(roleId, accessId);
     }
 
-    public Integer getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Integer roleId) {
+    public RoleAccess(Integer roleId, Integer accessId) {
         this.roleId = roleId;
-    }
-
-    public Integer getAccessId() {
-        return accessId;
-    }
-
-    public void setAccessId(Integer accessId) {
         this.accessId = accessId;
     }
 }

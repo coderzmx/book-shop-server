@@ -5,6 +5,8 @@ import com.ncuedu.bookshopserver.pojo.Book;
 import com.ncuedu.bookshopserver.pojo.vo.BookRankVo;
 import com.ncuedu.bookshopserver.pojo.vo.BookVo;
 import com.ncuedu.bookshopserver.service.BookService;
+import com.ncuedu.bookshopserver.util.AdminAuthority;
+import com.ncuedu.bookshopserver.util.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +24,8 @@ public class BookController {
 
     @Autowired
     private BookService bookService;
+    @Autowired
+    private AdminAuthority authority;
 
     @GetMapping("/book/booksByCateAndCondition")
     public PageInfo<BookVo> getBooksByCateAndCondition(Integer id,Integer condition, Integer currentPage){
@@ -64,14 +68,15 @@ public class BookController {
     }
 
     @GetMapping("/admin/books")
-    public PageInfo<BookVo> getBooks(Integer page,String title,String author,String stock,String saleVolume,String flag, Integer size){
+    public Message getBooks(Integer page,String title,String author,String stock,String saleVolume,String flag, Integer size, String adminToken){
+        if(adminToken==null||!authority.checkAuthority(adminToken,"/books")) return new Message(null,401);
         Map<String,Object> filter=new HashMap<>();
         filter.put("title",title);
         filter.put("author",author);
         filter.put("stock",stock);
         filter.put("saleVolume",saleVolume);
         filter.put("flag",flag);
-        return bookService.getBooksByCondition(page,size,filter);
+        return new Message(bookService.getBooksByCondition(page,size,filter),200);
     }
 
     @PutMapping("/admin/book")

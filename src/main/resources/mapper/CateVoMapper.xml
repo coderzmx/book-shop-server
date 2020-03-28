@@ -11,10 +11,10 @@
   <select id="selectAllCates" resultMap="BaseResultMap">
     SELECT a.*,b.cate_name parent_name FROM `cate` a left join cate b on a.parent_id=b.cate_id
     <where>
-      <if test="cateName!='undefined'">
+      <if test="cateName!='undefined' and cateName!=null">
         a.cate_name like '%${cateName}%'
       </if>
-      <if test="parentId!='undefined' and parentId!=''">
+      <if test="parentId!='undefined' and parentId!='' and parentId!=null">
         and a.parent_id=#{parentId}
       </if>
     </where>

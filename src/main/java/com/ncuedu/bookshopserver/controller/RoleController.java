@@ -3,6 +3,8 @@ package com.ncuedu.bookshopserver.controller;
 import com.ncuedu.bookshopserver.pojo.Role;
 import com.ncuedu.bookshopserver.pojo.vo.RoleVo;
 import com.ncuedu.bookshopserver.service.RoleService;
+import com.ncuedu.bookshopserver.util.AdminAuthority;
+import com.ncuedu.bookshopserver.util.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,10 +20,13 @@ public class RoleController {
 
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private AdminAuthority authority;
 
     @GetMapping("/roles")
-    public List<RoleVo> getRoles(){
-        return roleService.getRoles();
+    public Message getRoles(String adminToken){
+        if(adminToken==null||!authority.checkAuthority(adminToken,"/accesses")) return new Message(null,401);
+        return new Message(roleService.getRoles(),200);
     }
 
     @PutMapping("/role")

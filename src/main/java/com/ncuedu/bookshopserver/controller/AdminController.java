@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.ncuedu.bookshopserver.pojo.Admin;
 import com.ncuedu.bookshopserver.pojo.vo.AdminVo;
 import com.ncuedu.bookshopserver.service.AdminService;
+import com.ncuedu.bookshopserver.util.AdminAuthority;
+import com.ncuedu.bookshopserver.util.Message;
 import com.ncuedu.bookshopserver.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,8 @@ public class AdminController {
     private AdminService adminService;
     @Autowired
     private RedisUtil redisUtil;
+    @Autowired
+    private AdminAuthority authority;
     @PostMapping("/login")
     public String login(@RequestBody Admin admin){
         Integer result = adminService.login(admin);
@@ -39,8 +43,9 @@ public class AdminController {
     }
 
     @GetMapping("/admins")
-    public PageInfo<AdminVo> getAdmins(Integer page,String adminName){
-        return adminService.getAdmins(page,adminName);
+    public Message getAdmins(Integer page,String adminName,String adminToken){
+        if(adminToken==null||!authority.checkAuthority(adminToken,"/accesses")) return new Message(null,401);
+        return new Message(adminService.getAdmins(page,adminName),200);
     }
 
     @PutMapping("/admin")

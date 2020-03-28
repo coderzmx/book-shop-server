@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.ncuedu.bookshopserver.pojo.Author;
 import com.ncuedu.bookshopserver.pojo.vo.AuthorVo;
 import com.ncuedu.bookshopserver.service.AuthorService;
+import com.ncuedu.bookshopserver.util.AdminAuthority;
+import com.ncuedu.bookshopserver.util.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +20,8 @@ import java.util.List;
 public class AuthorController {
     @Autowired
     private AuthorService authorService;
+    @Autowired
+    private AdminAuthority authority;
 
     @GetMapping("/author/{id}")
     public Author getAuthorById(@PathVariable("id") Integer id){
@@ -35,9 +39,9 @@ public class AuthorController {
     }
 
     @GetMapping("/authors/page")
-    public PageInfo<Author> getAuthorsByPage(Integer page,String authorName){
-        System.out.println(authorName);
-        return authorService.getAuthorsByPage(page,authorName);
+    public Message getAuthorsByPage(Integer page,String authorName,String adminToken){
+        if(adminToken==null||!authority.checkAuthority(adminToken,"/authors")) return new Message(null,401);
+        return new Message(authorService.getAuthorsByPage(page,authorName),200);
     }
 
     @PostMapping("/author")

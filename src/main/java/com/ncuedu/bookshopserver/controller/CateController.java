@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.ncuedu.bookshopserver.pojo.Cate;
 import com.ncuedu.bookshopserver.pojo.vo.CateVo;
 import com.ncuedu.bookshopserver.service.CateService;
+import com.ncuedu.bookshopserver.util.AdminAuthority;
+import com.ncuedu.bookshopserver.util.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +21,8 @@ public class CateController {
 
     @Autowired
     private CateService cateService;
+    @Autowired
+    private AdminAuthority authority;
 
     @GetMapping("/cate/getCatesByPid")
     public List<Cate> getCatesByPid(Integer pid){
@@ -41,8 +45,9 @@ public class CateController {
     }
 
     @GetMapping("/admin/cates")
-    public PageInfo<CateVo> getAllCates(Integer page,String cateName,String parentId){
-        return cateService.getAllCates(page,cateName,parentId);
+    public Message getAllCates(Integer page, String cateName, String parentId, String adminToken){
+        if(adminToken==null||!authority.checkAuthority(adminToken,"/cates")) return new Message(null,401);
+        return new Message(cateService.getAllCates(page,cateName,parentId),200);
     }
 
     @PutMapping("/cate")

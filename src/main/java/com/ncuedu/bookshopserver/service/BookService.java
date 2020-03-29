@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.ncuedu.bookshopserver.pojo.Book;
 import com.ncuedu.bookshopserver.pojo.vo.BookRankVo;
 import com.ncuedu.bookshopserver.pojo.vo.BookVo;
+import org.springframework.data.elasticsearch.core.aggregation.AggregatedPage;
 
 import java.util.List;
 import java.util.Map;
@@ -38,4 +39,6 @@ public interface BookService {
     Integer addBook(Book book);
 
     Integer deleteBook(Integer id);
+
+    AggregatedPage<BookVo> searchBook(String keyword,Integer page,Integer condition);
 }

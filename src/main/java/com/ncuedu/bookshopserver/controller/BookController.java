@@ -8,6 +8,7 @@ import com.ncuedu.bookshopserver.service.BookService;
 import com.ncuedu.bookshopserver.util.AdminAuthority;
 import com.ncuedu.bookshopserver.util.Message;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.aggregation.AggregatedPage;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -39,6 +40,7 @@ public class BookController {
 
     @GetMapping("/book/bookByCondition")
     public PageInfo<BookVo> getBookByCindition(Integer currentPage,Integer condition){
+        System.out.println(condition);
         return bookService.getAllBookByCondition(currentPage,condition);
     }
 
@@ -92,5 +94,10 @@ public class BookController {
     @DeleteMapping("/admin/book/{id}")
     public Integer deleteBook(@PathVariable("id") Integer id){
         return bookService.deleteBook(id);
+    }
+
+    @GetMapping("/books/search")
+    public AggregatedPage<BookVo> searchBooks(String keyword,Integer page,Integer condition){
+        return bookService.searchBook(keyword, page,condition);
     }
 }

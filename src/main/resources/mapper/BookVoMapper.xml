@@ -27,7 +27,7 @@
   <sql id="Base_Column_List">
     book_id, book_title, book_stock, book_orderprice, book_saleprice, book_salevolume, 
     book_shelftime, book_presstime, book_isbn, book_press, book_des, book.author_id, book_img,
-    book_img2, book_img3,book_img4, book.cate_id, book_flag, book_recommend,author_name
+    book_img2, book_img3,book_img4, book.cate_id, book_flag, book_recommend,author_name,cate_name
   </sql>
 
   <sql id="filterCondition">
@@ -47,6 +47,8 @@
     <include refid="Base_Column_List" />
     from book left join author
     on book.author_id=author.author_id
+    left join cate on book.cate_id=cate.cate_id
+    where book_flag=1
     <include refid="filterCondition"/>
   </select>
 
@@ -55,7 +57,8 @@
     <include refid="Base_Column_List" />
     from book left join author
     on book.author_id=author.author_id
-    where book.cate_id=#{id}
+    left join cate on book.cate_id=cate.cate_id
+    where book.cate_id=#{id} and book_flag=1
     <include refid="filterCondition"/>
   </select>
 
@@ -64,10 +67,12 @@
     <include refid="Base_Column_List" />
     from book left join author
     on book.author_id=author.author_id
+    left join cate on book.cate_id=cate.cate_id
     where book.cate_id in
     <foreach collection="ids" open="(" separator="," close=")" item="id">
       #{id}
     </foreach>
+    and book_flag=1
     <include refid="filterCondition"/>
   </select>
 
@@ -76,6 +81,7 @@
     <include refid="Base_Column_List" />
     from book left join author
     on book.author_id=author.author_id
+    left join cate on book.cate_id=cate.cate_id
     where book_id=#{id}
   </select>
 
@@ -84,12 +90,13 @@
     <include refid="Base_Column_List" />
     from book left join author
     on book.author_id=author.author_id
-    WHERE cate_id=#{cateId} and book_id!=#{bookId} ORDER BY book_salevolume desc LIMIT 0,4;
+    left join cate on book.cate_id=cate.cate_id
+    WHERE book.cate_id=#{cateId} and book_id!=#{bookId} and book_flag=1 ORDER BY book_salevolume desc LIMIT 0,4;
   </select>
 
   <select id="selectBooksByCondition" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />,cate_name
+    <include refid="Base_Column_List" />
     from book left join author
     on book.author_id=author.author_id
     left join cate on book.cate_id=cate.cate_id

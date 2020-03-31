@@ -23,4 +23,6 @@ public interface UserService {
     Integer insertUser(User user);
 
     Integer updateUser(User user);
+
+    User getUserById(Integer id);
 }

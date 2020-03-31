@@ -42,8 +42,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean checkUserName(String userName) {
         UserExample userExample = new UserExample();
-        UserExample.Criteria criteria = userExample.createCriteria();
-        criteria.andUserNameEqualTo(userName);
+        userExample.or().andUserNameEqualTo(userName);
         List<User> users = userMapper.selectByExample(userExample);
         return users.size()>0;
     }
@@ -51,8 +50,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean checkUserTel(String userTel) {
         UserExample userExample = new UserExample();
-        UserExample.Criteria criteria = userExample.createCriteria();
-        criteria.andUserTelEqualTo(userTel);
+        userExample.or().andUserTelEqualTo(userTel);
         List<User> users = userMapper.selectByExample(userExample);
         return users.size()>0;
     }
@@ -65,6 +63,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public Integer updateUser(User user) {
         return userMapper.updateByPrimaryKeySelective(user);
+    }
+
+    @Override
+    public User getUserById(Integer id) {
+        return userMapper.selectByPrimaryKey(id);
     }
 
 }

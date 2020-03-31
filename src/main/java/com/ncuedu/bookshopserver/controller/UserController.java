@@ -92,6 +92,7 @@ public class UserController {
             result.put("code",400);
         }
         User user=new User(userVo.getUserName(),userVo.getUserPassword(),userVo.getUserTel());
+        user.setUserImg("head_default.jpg");
         Integer insertResult = userService.insertUser(user);
         if(insertResult==1){
             String key= UUID.randomUUID().toString();
@@ -112,5 +113,10 @@ public class UserController {
     public Integer checkCode(@RequestBody UserVo userVo){
         String code=(String) redisUtil.get(userVo.getUserTel());
         return code.equals(userVo.getCode())?1:0;
+    }
+
+    @GetMapping("/admin/user/{id}")
+    public User getUser(@PathVariable("id") Integer id){
+        return userService.getUserById(id);
     }
 }

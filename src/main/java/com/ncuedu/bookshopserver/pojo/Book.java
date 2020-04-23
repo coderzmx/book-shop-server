@@ -12,7 +12,6 @@ import java.util.Date;
 
 @Data
 public class Book implements Serializable {
-
     @Id
     private Integer bookId;
 

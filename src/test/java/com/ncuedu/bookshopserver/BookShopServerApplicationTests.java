@@ -5,6 +5,7 @@ import com.ncuedu.bookshopserver.pojo.Item;
 import com.ncuedu.bookshopserver.pojo.vo.BookVo;
 import com.ncuedu.bookshopserver.service.BookService;
 import com.ncuedu.bookshopserver.util.BookRepository;
+import com.ncuedu.bookshopserver.util.GetMessageCode;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -31,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class BookShopServerApplicationTests {
 
     @Autowired
@@ -44,8 +45,8 @@ class BookShopServerApplicationTests {
     private BookService bookService;
     @Test
     void test(){
-        List<BookVo> bookVos = bookVoMapper.selectAllByCondition(2);
-        System.out.println(bookVos);
+        String code = GetMessageCode.getCode("13361616956");
+        System.out.println(code);
     }
 
     @Test

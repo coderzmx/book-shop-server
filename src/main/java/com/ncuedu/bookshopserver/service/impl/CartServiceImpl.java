@@ -27,11 +27,14 @@ public class CartServiceImpl implements CartService {
     private CartVoMapper cartVoMapper;
     @Override
     public Integer addCart(Cart cart) {
+        //首先判查询该用户购物车中是否已有该商品
         CartExample cartExample = new CartExample();
         cartExample.or().andUserIdEqualTo(cart.getUserId()).andBookIdEqualTo(cart.getBookId());
         List<Cart> carts = cartMapper.selectByExample(cartExample);
+        //如果没有则直接添加
         if(carts.size()==0) return cartMapper.insert(cart);
         else {
+            //如果有则在原有订单项基础上进行修改
             Cart cart1 = carts.get(0);
             cart1.setCartAmount(cart1.getCartAmount()+1);
             cart1.setCartPrice(cart1.getBookSaleprice().multiply(new BigDecimal(cart1.getCartAmount())));

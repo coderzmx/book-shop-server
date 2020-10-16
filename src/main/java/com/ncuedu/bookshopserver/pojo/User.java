@@ -32,4 +32,7 @@ public class User implements Serializable {
         this.userPassword = userPassword;
         this.userTel = userTel;
     }
+    public User(){
+
+    }
 }

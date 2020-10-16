@@ -75,14 +75,19 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public PageInfo<BookVo> getBooksByFirstCateIDAndCondition(Integer id,Integer condition, Integer currentPage) {
-        if (currentPage==null) currentPage=1;
+        if (currentPage==null) currentPage=1;//若未传入页数则默认为1
+        //设置查询条件，即根据指定父类查询分类
         CateExample cateExample = new CateExample();
         CateExample.Criteria criteria = cateExample.createCriteria();
         criteria.andParentIdEqualTo(id);
+        //查询该父类下的所有子类
         List<Cate> cates = cateMapper.selectByExample(cateExample);
+        //将所有子类ID封装为list传递给mapper层
         List<Integer> ids=new ArrayList<>();
         cates.forEach((cate)->{ids.add(cate.getCateId());});
+        //设置分页参数
         PageHelper.startPage(currentPage,Define.PAGE_SIZE);
+        //将子类ID传入mapper方法查询对应类别下的书籍
         PageInfo<BookVo> pageInfo=new PageInfo<>(bookVoMapper.selectByFirstCateIdAndCondition(ids,condition));
         return pageInfo;
     }
@@ -153,9 +158,9 @@ public class BookServiceImpl implements BookService {
     @Override
     public AggregatedPage<BookVo> searchBook(String keyword, Integer pageNum,Integer condition) {
         if(pageNum==null) pageNum=0;
-        String preTag = "<em><strong><font color='#dd4b39'>";//google的色值
+        String preTag = "<em><strong><font color='#dd4b39'>";//设置高亮标签
         String postTag = "</font></strong></em>";
-        /*1.创建QueryBuilder(即设置查询条件)这儿创建的是组合查询(也叫多条件查询),后面会介绍更多的查询方法
+        /*1.创建QueryBuilder(即设置查询条件)这里创建的是组合查询(也叫多条件查询),后面会介绍更多的查询方法
          *组合查询BoolQueryBuilder
          * must(QueryBuilders)   :AND
          * mustNot(QueryBuilders):NOT

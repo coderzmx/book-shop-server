@@ -21,6 +21,8 @@ public class AddressServiceImpl implements AddressService {
     private AddressMapper addressMapper;
     @Override
     public Integer addAddress(Address address) {
+        //首先判断用户是否选择将此地址选为默认收货地址
+        //若是默认地址则先将已有的默认地址取消默认状态
         if(address.getAddressFlag()==1){
             Address record = new Address();
             record.setAddressFlag(0);
@@ -28,7 +30,9 @@ public class AddressServiceImpl implements AddressService {
             addressExample.or().andUserIdEqualTo(address.getUserId());
             addressMapper.updateByExampleSelective(record,addressExample);
         }
-        return addressMapper.insertSelective(address);
+        //插入该地址
+        addressMapper.insertSelective(address);
+        return address.getAddressId();
     }
 
     @Override

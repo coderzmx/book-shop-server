@@ -8,6 +8,7 @@ import com.ncuedu.bookshopserver.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -86,21 +87,25 @@ public class UserController {
 
     @PostMapping("/user/register")
     public Map<String, Object> register(@RequestBody UserVo userVo){
-        String code =(String) redisUtil.get(userVo.getUserTel());
-        Map<String,Object> result=new HashMap<>();
-        if(!userVo.getCode().equals(code)){
+        String code =(String) redisUtil.get(userVo.getUserTel());//在redis上取出发送的验证码
+        Map<String,Object> result=new HashMap<>();//用于封装返回结果
+        if(!userVo.getCode().equals(code)){//判断用户输入的验证码是否正确
             result.put("code",400);
+            return result;
         }
         User user=new User(userVo.getUserName(),userVo.getUserPassword(),userVo.getUserTel());
         user.setUserImg("head_default.jpg");
-        Integer insertResult = userService.insertUser(user);
-        if(insertResult==1){
-            String key= UUID.randomUUID().toString();
-            redisUtil.set(key,user);
+        user.setUserMoney(new BigDecimal(10000));
+        user.setUserNickname("无昵称用户");
+        user.setUserSex("男");
+        Integer insertResult = userService.insertUser(user);//将用户信息插入数据库中
+        if(insertResult==1){//判断数据库插入是否成功
+            String key= UUID.randomUUID().toString();//生成UUID
+            redisUtil.set(key,user);//将用户信息存储在redis中
             result.put("token",key);
-            result.put("userInfo",user);
+            result.put("userInfo",user);//将token和用户信息返回到前端
         }
-        result.put("code",insertResult);
+        result.put("code",insertResult);//封装操作结果
         return result;
     }
 

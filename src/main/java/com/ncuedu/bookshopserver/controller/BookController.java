@@ -39,7 +39,7 @@ public class BookController {
     }
 
     @GetMapping("/book/bookByCondition")
-    public PageInfo<BookVo> getBookByCindition(Integer currentPage,Integer condition){
+    public PageInfo<BookVo> getBookByCondition(Integer currentPage,Integer condition){
         System.out.println(condition);
         return bookService.getAllBookByCondition(currentPage,condition);
     }

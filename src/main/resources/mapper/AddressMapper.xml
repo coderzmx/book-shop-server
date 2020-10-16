@@ -116,7 +116,7 @@
       #{addressDetailed,jdbcType=VARCHAR}, #{addressCode,jdbcType=VARCHAR}, #{addressName,jdbcType=VARCHAR}, 
       #{addressTel,jdbcType=VARCHAR}, #{addressFlag,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.ncuedu.bookshopserver.pojo.Address">
+  <insert id="insertSelective" parameterType="com.ncuedu.bookshopserver.pojo.Address" useGeneratedKeys="true" keyProperty="addressId">
     insert into address
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="addressId != null">

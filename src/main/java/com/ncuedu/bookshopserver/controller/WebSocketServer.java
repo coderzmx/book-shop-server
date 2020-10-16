@@ -24,31 +24,39 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class WebSocketServer {
 
-    /**concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。*/
+    //concurrent包的线程安全Set，用来存放每个客户端对应的WebSocket对象
     private static ConcurrentHashMap<String,WebSocketServer> userSocket = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String,WebSocketServer> adminSocket = new ConcurrentHashMap<>();
-    /**与某个客户端的连接会话，需要通过它来给客户端发送数据*/
+    //与某个客户端的连接会话，需要通过它来给客户端发送数据
     private Session session;
-    /**接收userId*/
+    //接收Id
     private String id="";
+    //判断是否为用户
     private String isUser="";
+    //判断是否已经与人连接
     private boolean isConnect=false;
 
+    //会话打开时触发
     @OnOpen
     public void onOpen(Session session, @PathParam("id") String id, @PathParam("isUser") String isUser) throws IOException {
         this.session = session;
         this.id=id;
         this.isUser=isUser;
+        //判单是否为用户
         if("1".equals(isUser)){
+            //如果socket池中已有该用户对应的socket，则先将其删除再将该socket放入socket池
             if(userSocket.containsKey(id)){
                 userSocket.remove(id);
             }
             userSocket.put(id,this);
+            //判断是否有客服在线
             if(adminSocket.size()==0){
                 System.out.println("当前没有客服在线");
             }else{
+                //遍历客服socket池
                 for (String s : adminSocket.keySet()) {
                     WebSocketServer webSocketServer = adminSocket.get(s);
+                    //如果该客服已有服务对象则跳过
                     if(webSocketServer.isConnect){
                         continue;
                     }
@@ -56,12 +64,15 @@ public class WebSocketServer {
                     Map<String,Object> message=new HashMap<>();
                     message.put("flag",0);
                     message.put("id",id);
-                    sendInfo(JSON.toJSONString(message),s,"2");
+                    //向客服端发送连接消息
+                    sendInfo(JSON.toJSONString(message),s,"0");
                     message.put("id",s);
+                    //向用户端发送连接消息
                     sendInfo(JSON.toJSONString(message),id,"1");
                 }
             }
         }else if("0".equals(isUser)){
+            //若为客服则直接放入socket池
             if(adminSocket.containsKey(id)){
                 adminSocket.remove(id);
             }
@@ -80,16 +91,16 @@ public class WebSocketServer {
         System.out.println("用户退出");
     }
 
+    //发送信息时触发
     @OnMessage
     public void onMessage(String message, Session session) {
         System.out.println("类型"+isUser+"消息:"+id+",报文:"+message);
-        //可以群发消息
-        //消息保存到数据库、redis
+        //判断信息是否为空
         if(StringUtils.isNotBlank(message)){
             try {
                 //解析发送的报文
                 JSONObject jsonObject = JSON.parseObject(message);
-                //追加发送人(防止串改)
+                //设置相关参数
                 jsonObject.put("fromUserId",this.id);
                 jsonObject.put("flag",1);
                 jsonObject.put("date",new Date());

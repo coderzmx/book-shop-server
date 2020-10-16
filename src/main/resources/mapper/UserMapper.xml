@@ -115,7 +115,7 @@
       #{userMoney,jdbcType=DECIMAL}, #{userDes,jdbcType=VARCHAR}, #{userNickname,jdbcType=VARCHAR}, 
       #{userImg,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ncuedu.bookshopserver.pojo.User">
+  <insert id="insertSelective" parameterType="com.ncuedu.bookshopserver.pojo.User" useGeneratedKeys="true" keyProperty="userId">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">
